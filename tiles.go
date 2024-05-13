@@ -4,23 +4,29 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
 type piastrella struct {
-	x      int
-	y      int
+	x int
+	y int
+}
+
+type pair struct {
+	number int
+	letter string
 }
 
 type rule struct {
-	rule    string
-	consumo int
+	ruleset map[string]int
+	color   string
 }
 
 type piano struct {
 	tiles map[piastrella][2]string
-	rules []rule
-    adj []piastrella
+	rules []rule // uso un array per sfruttare un algoritmo di sorting
+	adj   []piastrella
 }
 
 func main() {
@@ -39,13 +45,20 @@ func main() {
 		op := istruzione[0]
 		switch op {
 		case "C":
-			colora(p, istruzione[1], istruzione[2], istruzione[3])
+			x, _ := strconv.Atoi(istruzione[1])
+			y, _ := strconv.Atoi(istruzione[2])
+			colora(p, x, y, istruzione[3], 0)
 		case "S":
-			spegni(p, istruzione[1], istruzione[2])
+			x, _ := strconv.Atoi(istruzione[1])
+			y, _ := strconv.Atoi(istruzione[2])
+			spegni(p, x, y)
 		case "r":
+			_, r, _ := strings.Cut(scanner.Text(), " ")
 			regola(p, r)
 		case "?":
-			stato(p, istruzione[1], istruzione[2])
+			x, _ := strconv.Atoi(istruzione[1])
+			y, _ := strconv.Atoi(istruzione[2])
+			stato(p, x, y)
 		case "s":
 			stampa(p)
 		case "b":
