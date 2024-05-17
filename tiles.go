@@ -13,20 +13,20 @@ type piastrella struct {
 	y int
 }
 
-type pair struct {
-	number int
-	letter string
+type lights struct {
+	color string
+	intensity int
 }
 
 type rule struct {
+    raw string
 	ruleset map[string]int
 	color   string
 }
 
 type piano struct {
-	tiles map[piastrella][2]string
+	tiles map[piastrella]lights //insieme delle piastrelle accese. chiave e' piastrella, valore sono colore e intensita'
 	rules []rule // uso un array per sfruttare un algoritmo di sorting
-	adj   []piastrella
 }
 
 func main() {
@@ -37,7 +37,7 @@ func main() {
 	}
 	defer file.Close()
 
-	p := piano{tiles: make(map[piastrella][2]string), rules: make([]rule, 0), adj: make([]piastrella, 0)}
+	p := piano{tiles: make(map[piastrella]lights), rules: make([]rule, 0)}
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
@@ -47,7 +47,8 @@ func main() {
 		case "C":
 			x, _ := strconv.Atoi(istruzione[1])
 			y, _ := strconv.Atoi(istruzione[2])
-			colora(p, x, y, istruzione[3], 0)
+            intensity, _ := strconv.Atoi(istruzione[4])
+			colora(p, x, y, istruzione[3], intensity)
 		case "S":
 			x, _ := strconv.Atoi(istruzione[1])
 			y, _ := strconv.Atoi(istruzione[2])
