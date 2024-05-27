@@ -16,6 +16,7 @@ type piastrella struct {
 type properties struct {
 	color     string
 	intensity int
+	radice    *piastrella // uso radice (puntatore a piastrella) per tenere traccia del blocco di appartenenza di una piastrella (U&F)
 }
 
 type rule struct {
@@ -64,23 +65,23 @@ func main() {
 		case "s":
 			stampa(p)
 		case "b":
-            x, _ := strconv.Atoi(istruzione[1])
-            y, _ := strconv.Atoi(istruzione[2])
-            blocco(p, x, y)
+			x, _ := strconv.Atoi(istruzione[1])
+			y, _ := strconv.Atoi(istruzione[2])
+			blocco(p, x, y)
 		case "B":
-            x, _ := strconv.Atoi(istruzione[1])
-            y, _ := strconv.Atoi(istruzione[2])
-            bloccoOmog(p, x, y)
+			x, _ := strconv.Atoi(istruzione[1])
+			y, _ := strconv.Atoi(istruzione[2])
+			bloccoOmog(p, x, y)
 		case "p":
-            x, _ := strconv.Atoi(istruzione[1])
-            y, _ := strconv.Atoi(istruzione[2])
-            propaga(p, x, y)
+			x, _ := strconv.Atoi(istruzione[1])
+			y, _ := strconv.Atoi(istruzione[2])
+			propaga(p, x, y)
 		case "P":
-            x, _ := strconv.Atoi(istruzione[1])
-            y, _ := strconv.Atoi(istruzione[2])
-            propagaBlocco(p, x, y)
+			x, _ := strconv.Atoi(istruzione[1])
+			y, _ := strconv.Atoi(istruzione[2])
+			propagaBlocco(p, x, y)
 		case "o":
-            ordina(p)
+			ordina(p)
 		case "q":
 			return
 		}
