@@ -13,20 +13,21 @@ type piastrella struct {
 	y int
 }
 
-type lights struct {
-	color string
+type properties struct {
+	color     string
 	intensity int
 }
 
 type rule struct {
-    raw string
+	raw     string
 	ruleset map[string]int
 	color   string
+	usage   int
 }
 
 type piano struct {
-	tiles map[piastrella]lights //insieme delle piastrelle accese. chiave e' piastrella, valore sono colore e intensita'
-	rules []rule // uso un array per sfruttare un algoritmo di sorting
+	tiles map[piastrella]properties // insieme delle piastrelle accese. chiave e' piastrella, valore sono colore e intensita'
+	rules []rule                    // uso un array per sfruttare un algoritmo di sorting
 }
 
 func main() {
@@ -37,7 +38,7 @@ func main() {
 	}
 	defer file.Close()
 
-	p := piano{tiles: make(map[piastrella]lights), rules: make([]rule, 0)}
+	p := piano{tiles: make(map[piastrella]properties), rules: make([]rule, 0)}
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
@@ -47,7 +48,7 @@ func main() {
 		case "C":
 			x, _ := strconv.Atoi(istruzione[1])
 			y, _ := strconv.Atoi(istruzione[2])
-            intensity, _ := strconv.Atoi(istruzione[4])
+			intensity, _ := strconv.Atoi(istruzione[4])
 			colora(p, x, y, istruzione[3], intensity)
 		case "S":
 			x, _ := strconv.Atoi(istruzione[1])
@@ -63,10 +64,23 @@ func main() {
 		case "s":
 			stampa(p)
 		case "b":
+            x, _ := strconv.Atoi(istruzione[1])
+            y, _ := strconv.Atoi(istruzione[2])
+            blocco(p, x, y)
 		case "B":
+            x, _ := strconv.Atoi(istruzione[1])
+            y, _ := strconv.Atoi(istruzione[2])
+            bloccoOmog(p, x, y)
 		case "p":
+            x, _ := strconv.Atoi(istruzione[1])
+            y, _ := strconv.Atoi(istruzione[2])
+            propaga(p, x, y)
 		case "P":
+            x, _ := strconv.Atoi(istruzione[1])
+            y, _ := strconv.Atoi(istruzione[2])
+            propagaBlocco(p, x, y)
 		case "o":
+            ordina(p)
 		case "q":
 			return
 		}
