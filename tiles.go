@@ -16,7 +16,8 @@ type piastrella struct {
 type properties struct {
 	color     string
 	intensity int
-	radice    *piastrella // uso radice (puntatore a piastrella) per tenere traccia del blocco di appartenenza di una piastrella (U&F)
+	parent    *piastrella
+	rank      int
 }
 
 type rule struct {
@@ -81,7 +82,9 @@ func main() {
 			y, _ := strconv.Atoi(istruzione[2])
 			propagaBlocco(p, x, y)
 		case "o":
-			ordina(p)
+			res := make([]rule, 0)
+			res = ordina(p)
+			p.rules = res
 		case "q":
 			return
 		}
