@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 )
 
@@ -32,16 +31,9 @@ type piano struct {
 }
 
 func main() {
-	file, err := os.Open("input.txt")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	defer file.Close()
-
 	p := makeSet()
 
-	scanner := bufio.NewScanner(file)
+	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
 		esegui(p, scanner.Text())
 	}
