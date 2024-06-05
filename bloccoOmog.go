@@ -1,4 +1,4 @@
-package tiles
+package main
 
 func esploraVicini(p piano, x, y int, seen map[piastrella]bool, sum *int) {
     tile := piastrella{x: x, y: y}

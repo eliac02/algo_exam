@@ -1,4 +1,4 @@
-package tiles
+package main
 
 func makeSet() piano {
     return piano{

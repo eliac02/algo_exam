@@ -1,4 +1,4 @@
-package tiles
+package main
 
 func colora(p piano, x, y int, alpha string, i int) {
     var tile = piastrella{x: x, y: y}

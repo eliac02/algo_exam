@@ -1,4 +1,4 @@
-package tiles
+package main
 
 func merge(left, right []rule) []rule {
 	result := make([]rule, 0, len(left)+len(right))

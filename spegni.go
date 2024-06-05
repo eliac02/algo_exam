@@ -1,4 +1,4 @@
-package tiles
+package main
 
 func spegni(p piano, x, y int) {
     tile := piastrella{x: x, y: y}
