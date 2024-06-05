@@ -14,10 +14,11 @@ type piastrella struct {
 }
 
 type properties struct {
-	color     string
-	intensity int
-	parent    *piastrella
-	rank      int
+	color          string
+	intensity      int
+	parent         piastrella
+	rank           int
+	blockIntensity int
 }
 
 type rule struct {
@@ -28,8 +29,8 @@ type rule struct {
 }
 
 type piano struct {
-	tiles map[piastrella]properties // insieme delle piastrelle accese. chiave e' piastrella, valore sono colore e intensita'
-	rules []rule                    // uso un array per sfruttare un algoritmo di sorting
+	tiles map[piastrella]*properties // insieme delle piastrelle (uso puntatore a properties per questioni di addressability)
+	rules []rule                     // uso un array per sfruttare un algoritmo di sorting
 }
 
 func main() {
@@ -40,7 +41,7 @@ func main() {
 	}
 	defer file.Close()
 
-	p := piano{tiles: make(map[piastrella]properties), rules: make([]rule, 0)}
+	p := makeSet()
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {

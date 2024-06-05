@@ -1,43 +1,40 @@
 package tiles
 
-type UnionFind struct {
-    parent map[[2]int][2]int
-    rank map[[2]int]int
-}
-
-func newBlock() *UnionFind {
-    return &UnionFind{
-        parent: make(map[[2]int][2]int),
-        rank: make(map[[2]int][2]int),
+func makeSet() piano {
+    return piano{
+        tiles: make(map[piastrella]*properties),
+        rules: make([]rule, 0),
     }
 }
 
-func (uf *UnionFind) Find(x [2]int) [2]int {
-    if uf.parent[x] != x {
-        uf.parent[x] = uf.Find(uf.parent[x])
+func (p piano) Find(x piastrella) piastrella {
+    if p.tiles[x].parent != x {
+        p.tiles[x].parent = p.Find(p.tiles[x].parent)
     }
-    return uf.parent[x]
+    return p.tiles[x].parent
 }
 
-func (uf *UnionFind) Union(x, y [2]int) {
-    rootX := uf.Find(x)
-    rootY := uf.Find(x)
+func (p piano) Union(x, y piastrella) {
+    rootX := p.Find(x)
+    rootY := p.Find(x)
 
     if rootX != rootY {
-        if uf.parent[rootX] > uf.parent[rootY] {
-            uf.parent[rootY] = rootX
-        } else if uf.parent[rootY] > uf.parent[rootX] {
-            uf.parent[rootX] = rootY
+        if p.tiles[rootX].rank > p.tiles[rootY].rank {
+            p.tiles[rootY].parent = rootX
+            p.tiles[rootX].blockIntensity += p.tiles[rootY].blockIntensity
+        } else if p.tiles[rootY].rank > p.tiles[rootX].rank {
+            p.tiles[rootX].parent = rootY
+            p.tiles[rootY].blockIntensity += p.tiles[rootX].blockIntensity
         } else {
-            uf.parent[rootY] = rootX
-            uf.rank[rootX]++
+            p.tiles[rootY].parent = rootX
+            p.tiles[rootX].rank++
+            p.tiles[rootX].blockIntensity += p.tiles[rootY].blockIntensity
         }
     }
 }
 
-func (uf *UnionFind) Add(x [2]int) {
-    if _, exists := uf.parent[x]; !exists {
-        uf.parent[x] = x
-        uf.rank[x] = 0
+func (p piano) Add(x piastrella, c string, i int) {
+    if _, exists := p.tiles[x]; !exists {
+        p.tiles[x] = &properties{color: c, intensity: i, parent: x, rank: 0, blockIntensity: i}
     }
 }
