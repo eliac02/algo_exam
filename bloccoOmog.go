@@ -2,7 +2,7 @@ package main
 
 func esploraVicini(p piano, x, y int, seen map[piastrella]bool, sum *int) {
     tile := piastrella{x: x, y: y}
-    adiacenti := []piastrella{{x, y+1}, {x-1, y+1}, {x-1, y}, {x-1, y-1}, {x, y-1}, {x+1, y-1}, {x+1, y}, {x+1, y+1}}
+    adiacenti := getAdiacenti(x, y)
     for _, adj := range adiacenti {
         if _, exists := p.tiles[adj]; exists {
             seen[piastrella{x:x,y:y}] = true
