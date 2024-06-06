@@ -1,9 +1,10 @@
 package main
 
 func makeSet() piano {
+    rules := make([]rule, 0)
     return piano{
         tiles: make(map[piastrella]*properties),
-        rules: make([]rule, 0),
+        rules: &rules,
     }
 }
 

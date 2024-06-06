@@ -1,31 +1,38 @@
 package main
 
 func merge(left, right []rule) []rule {
-	result := make([]rule, 0, len(left)+len(right))
+	var sorted []rule
 	i, j := 0, 0
 	for i < len(left) && j < len(right) {
 		if left[i].usage <= right[j].usage {
-			result = append(result, left[i])
+			sorted = append(sorted, left[i])
 			i++
 		} else {
-			result = append(result, right[i])
+			sorted = append(sorted, right[i])
 			j++
 		}
 	}
 
-	result = append(result, left[i:]...)
-	result = append(result, right[j:]...)
+	sorted = append(sorted, left[i:]...)
+	sorted = append(sorted, right[j:]...)
 
-	return result
+	return sorted
 }
 
-func mergeSort(arr []rule) []rule {
-	if len(arr) <= 1 {
-		return arr
+func mergeSort(arr *[]rule) {
+	if len(*arr) <= 1 {
+		return 
 	}
-	half := len(arr) / 2
-	left := mergeSort(arr[:half])
-	right := mergeSort(arr[half:])
+	half := len(*arr) / 2
+    left := make([]rule, half)
+    right := make([]rule, len(*arr)-half)
 
-	return merge(left, right)
+    copy(left, (*arr)[:half])
+    copy(right, (*arr)[half:])
+
+    mergeSort(&left)
+    mergeSort(&right)
+
+    merged := merge(left, right)
+	copy(*arr, merged)
 }

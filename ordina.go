@@ -1,6 +1,5 @@
 package main
 
-func ordina(p piano) []rule {
-    p.rules = mergeSort(p.rules)
-    return p.rules
+func ordina(p piano) {
+    mergeSort(p.rules)
 }

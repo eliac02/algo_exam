@@ -6,10 +6,10 @@ import (
 
 func stampa(p piano) {
     fmt.Println("(")
-    for i:=0; i<len(p.rules); i++ {
-        fmt.Printf("%s: ", p.rules[i].color)
-        for key, value := range p.rules[i].ruleset {
-            fmt.Print(value, key)
+    for _, rule := range *p.rules {
+        fmt.Printf("%s: ", rule.color)
+        for key, value := range rule.ruleset {
+            fmt.Printf("%d %s ", value, key)
         }
         fmt.Println()
     }
