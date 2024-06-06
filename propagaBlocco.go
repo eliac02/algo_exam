@@ -7,8 +7,8 @@ func propagaBlocco(p piano, x, y int) {
 	block := esploraBlocco(p, root, seen)
 
 	originalBlock := make(map[piastrella]*properties)
-	for p, props := range block {
-		originalBlock[p] = &properties{
+	for t, props := range block {
+		originalBlock[t] = &properties{
 			color:          props.color,
 			intensity:      props.intensity,
 			parent:         props.parent,
@@ -17,9 +17,9 @@ func propagaBlocco(p piano, x, y int) {
 		}
 	}
 
-	for p := range block {
+    for t := range block {
 		colorCount := make(map[string]int)
-		adiacenti := getAdiacenti(x, y)
+		adiacenti := getAdiacenti(t.x, t.y)
 		for _, adj := range adiacenti {
 			if props, exists := originalBlock[adj]; exists {
 				colorCount[props.color]++

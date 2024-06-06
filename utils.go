@@ -16,7 +16,8 @@ func ruleOk(reg rule, colorCount map[string]int) bool {
     return true
 }
 
-func esploraBlocco(p piano, root piastrella, seen map[piastrella]bool) map[piastrella]*properties {
+func esploraBlocco(p piano, start piastrella, seen map[piastrella]bool) map[piastrella]*properties {
+    root := p.Find(start)
     block := make(map[piastrella]*properties)
     pila := []piastrella{root}
     seen[root] = true
