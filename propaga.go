@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func propaga(p piano, x, y int) {
 	tile := piastrella{x: x, y: y}
 	colorCount := make(map[string]int)
@@ -10,14 +12,16 @@ func propaga(p piano, x, y int) {
 		}
 	}
 
-	for _, reg := range *p.rules {
+	for index, reg := range *p.rules {
 		if ruleOk(reg, colorCount) {
 			if _, exists := p.tiles[tile]; exists {
 				p.tiles[tile].color = reg.color
-				break
 			} else {
-                colora(p, x, y, reg.color, 1)
-            }
+				colora(p, x, y, reg.color, 1)
+			}
+			fmt.Println(reg)
+			(*p.rules)[index].usage++
+			break
 		}
 	}
 }

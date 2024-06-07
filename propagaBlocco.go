@@ -1,10 +1,11 @@
 package main
 
+import "fmt"
+
 func propagaBlocco(p piano, x, y int) {
 	tile := piastrella{x: x, y: y}
-	root := p.Find(tile)
 	seen := make(map[piastrella]bool)
-	block := esploraBlocco(p, root, seen)
+	block := esploraBlocco(p, tile, seen)
 
 	originalBlock := make(map[piastrella]*properties)
 	for t, props := range block {
@@ -17,7 +18,7 @@ func propagaBlocco(p piano, x, y int) {
 		}
 	}
 
-    for t := range block {
+	for t := range block {
 		colorCount := make(map[string]int)
 		adiacenti := getAdiacenti(t.x, t.y)
 		for _, adj := range adiacenti {
@@ -26,9 +27,11 @@ func propagaBlocco(p piano, x, y int) {
 			}
 		}
 
-		for _, reg := range *p.rules {
+		for index, reg := range *p.rules {
 			if ruleOk(reg, colorCount) {
-				p.tiles[tile].color = reg.color
+				fmt.Println(reg)
+				p.tiles[t].color = reg.color
+				(*p.rules)[index].usage++
 				break
 			}
 		}

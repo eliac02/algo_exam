@@ -1,0 +1,46 @@
+C 1 1 rosso 3
+C 2 2 rosso 5
+C 1 2 viola 1
+C 3 1 verde 2
+C 1 3 azzurro 7
+C 0 3 rosso 2
+C 3 2 verde 1
+C 1 4 rosso 1
+C 2 3 rosso 2
+C 5 4 giallo 3
+C 5 3 viola 2
+C 6 3 giallo 4
+C 0 2 azzurro 9
+C 7 2 giallo 5
+C 2 1 viola 6
+C 6 0 rosa 8
+C 7 0 rosa 10
+r rosso 1 verde 1 viola
+r azzurro 3 rosso
+r rosso 2 rosso
+r nero 1 rosa
+r nero 1 viola
+? 3 1
+p 3 1
+? 3 1
+? 1 2
+p 1 2
+? 1 2
+B 1 3
+B 3 1
+? 7 0
+p 7 0
+? 7 0
+C 7 0 nero 20
+? 7 0
+C 7 0 viola 10
+? 7 0
+P 1 4
+o
+s
+B 2 1
+B 0 2
+S 6 3
+b 5 4
+b 7 2
+q

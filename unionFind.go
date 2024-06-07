@@ -17,7 +17,7 @@ func (p piano) Find(x piastrella) piastrella {
 
 func (p piano) Union(x, y piastrella) {
     rootX := p.Find(x)
-    rootY := p.Find(x)
+    rootY := p.Find(y)
 
     if rootX != rootY {
         if p.tiles[rootX].rank > p.tiles[rootY].rank {
@@ -37,5 +37,8 @@ func (p piano) Union(x, y piastrella) {
 func (p piano) Add(x piastrella, c string, i int) {
     if _, exists := p.tiles[x]; !exists {
         p.tiles[x] = &properties{color: c, intensity: i, parent: x, rank: 0, blockIntensity: i}
+    } else {
+        p.tiles[x].color = c
+        p.tiles[x].intensity = i
     }
 }
