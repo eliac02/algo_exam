@@ -1,0 +1,4 @@
+(
+giallo: 3 rosso 3 verde
+casa: 1 verde 1 ciao 1 forza 1 blu
+)

@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func propaga(p piano, x, y int) {
 	tile := piastrella{x: x, y: y}
 	colorCount := make(map[string]int)
@@ -19,7 +17,6 @@ func propaga(p piano, x, y int) {
 			} else {
 				colora(p, x, y, reg.color, 1)
 			}
-			fmt.Println(reg)
 			(*p.rules)[index].usage++
 			break
 		}

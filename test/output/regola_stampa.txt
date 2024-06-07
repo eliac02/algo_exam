@@ -1,4 +1,0 @@
-r giallo 3 verde 3 rosso
-r casa 1 verde 1 ciao 1 forza 1 blu
-s
-q

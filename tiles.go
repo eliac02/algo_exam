@@ -26,8 +26,8 @@ type rule struct {
 }
 
 type piano struct {
-	tiles map[piastrella]*properties // insieme delle piastrelle (uso puntatore a properties per questioni di addressability)
-	rules *[]rule                     // uso un array per sfruttare un algoritmo di sorting
+	tiles map[piastrella]*properties
+	rules *[]rule
 }
 
 func main() {

@@ -33,9 +33,10 @@ p 7 0
 ? 7 0
 C 7 0 nero 20
 ? 7 0
-C 7 0 viola 10
+C 7 0 rosa 10
 ? 7 0
 P 1 4
+s
 o
 s
 B 2 1

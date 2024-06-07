@@ -1,0 +1,21 @@
+verde 2
+rosso 2
+viola 1
+azzurro 1
+17
+15
+rosa 10
+nero 10
+nero 20
+rosa 10
+(
+nero: 1 rosa
+nero: 1 viola
+rosso: 1 verde 1 viola
+rosso: 2 rosso
+azzurro: 3 rosso
+)
+15
+21
+5
+5

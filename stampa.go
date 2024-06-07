@@ -9,7 +9,7 @@ func stampa(p piano) {
     for _, rule := range *p.rules {
         fmt.Printf("%s: ", rule.color)
         for key, value := range rule.ruleset {
-            fmt.Printf("%d %s ", value, key)
+            fmt.Printf("%d %s ", value, key, )
         }
         fmt.Println()
     }

@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func propagaBlocco(p piano, x, y int) {
 	tile := piastrella{x: x, y: y}
 	seen := make(map[piastrella]bool)
@@ -29,7 +27,6 @@ func propagaBlocco(p piano, x, y int) {
 
 		for index, reg := range *p.rules {
 			if ruleOk(reg, colorCount) {
-				fmt.Println(reg)
 				p.tiles[t].color = reg.color
 				(*p.rules)[index].usage++
 				break

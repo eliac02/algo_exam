@@ -1,0 +1,11 @@
+blu 3
+rosso 2
+viola 5
+blu 3
+verde 5
+verdeScuro 2
+viola 10
+viola 10
+verde 2
+verde 5
+blu 3
