@@ -21,8 +21,6 @@ func regola(p piano, r string) {
             count: num,
         })
 	}
-    //usg, _ := strconv.Atoi(rulesSplitted[len(rulesSplitted)-1])
-	//newRule.usage = usg
 	newRule.usage = 0
     *p.rules = append(*p.rules, newRule)
 }
