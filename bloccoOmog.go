@@ -8,10 +8,15 @@ func bloccoOmog(p piano, x, y int) {
 		fmt.Println("0")
 		return
 	}
-	somma := 0
-	var sum *int = &somma
-	seen := make(map[piastrella]bool)
-	seen[piastrella{x: x, y: y}] = true
-	esploraViciniOmog(p, x, y, seen, sum)
-    fmt.Println(somma)
+    root := p.Find(tile)
+	sum := 0
+    block := make(map[piastrella]*properties)
+    seen := make(map[piastrella]bool)
+    block = trovaBlocco(p, root, seen)
+    for t := range block {
+        if p.tiles[t].color == p.tiles[tile].color {
+            sum += p.tiles[t].intensity
+        }
+    }
+    fmt.Println(sum)
 }

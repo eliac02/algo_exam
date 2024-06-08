@@ -2,8 +2,9 @@ package main
 
 func propagaBlocco(p piano, x, y int) {
 	tile := piastrella{x: x, y: y}
+    root := p.Find(tile)
 	seen := make(map[piastrella]bool)
-	block := esploraBlocco(p, tile, seen)
+	block := trovaBlocco(p, root, seen)
 
 	originalBlock := make(map[piastrella]*properties)
 	for t, props := range block {

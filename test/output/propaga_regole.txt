@@ -9,6 +9,13 @@ nero 10
 nero 20
 rosa 10
 (
+rosso: 1 verde 1 viola
+azzurro: 3 rosso
+rosso: 2 rosso
+nero: 1 rosa
+nero: 1 viola
+)
+(
 nero: 1 rosa
 nero: 1 viola
 rosso: 1 verde 1 viola
@@ -17,5 +24,7 @@ azzurro: 3 rosso
 )
 15
 21
+14
+14
 5
 5

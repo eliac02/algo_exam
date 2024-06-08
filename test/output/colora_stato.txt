@@ -1,3 +1,5 @@
 blu 5
 rosso 9
 verde 9
+quattro 4
+giallo 5
