@@ -8,8 +8,8 @@ func getAdiacenti(x, y int) [8]piastrella {
 }
 
 func ruleOk(reg rule, colorCount map[string]int) bool {
-	for color, count := range reg.ruleset {
-		if colorCount[color] < count {
+	for _, rs := range reg.ruleset {
+		if colorCount[rs.color] < rs.count {
 			return false
 		}
 	}
@@ -46,7 +46,7 @@ func esploraBlocco(p piano, start piastrella, seen map[piastrella]bool) map[pias
 		current := pila[len(pila)-1]
 		pila = pila[:len(pila)-1]
 
-        if _, ok := seen[current]; ok {
+        if seen[current] {
             continue
         }
 
@@ -64,3 +64,48 @@ func esploraBlocco(p piano, start piastrella, seen map[piastrella]bool) map[pias
 	}
 	return block
 }
+
+func trovaBlocco(p piano, start piastrella, seen map[piastrella]bool) map[piastrella]*properties {
+	block := make(map[piastrella]*properties)
+	pila := []piastrella{start}
+
+	for len(pila) > 0 {
+		current := pila[len(pila)-1]
+		pila = pila[:len(pila)-1]
+
+        if seen[current] {
+            continue
+        }
+
+        seen[current] = true
+        block[current] = p.tiles[current]
+
+		adiacenti := getAdiacenti(current.x, current.y)
+		for _, adj := range adiacenti {
+			if _, exists := p.tiles[adj]; exists && !seen[adj] {
+					pila = append(pila, adj)
+				}
+			}
+		}
+	return block
+}
+
+func cambiaRadice(p piano, root piastrella) {
+	adiacenti := getAdiacenti(root.x, root.y)
+	seen := make(map[piastrella]bool)
+	block := trovaBlocco(p, root, seen)
+	for _, adj := range adiacenti {
+		if _, exists := p.tiles[adj]; exists {
+			p.tiles[root].blockIntensity -= p.tiles[root].intensity
+			p.tiles[root].rank--
+			p.tiles[adj].blockIntensity = p.tiles[root].blockIntensity
+			p.tiles[adj].rank = p.tiles[root].rank
+			p.tiles[adj].parent = adj
+			for t := range block {
+				p.tiles[t].parent = adj
+			}
+			return
+		}
+	}
+}
+

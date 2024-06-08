@@ -18,9 +18,14 @@ type properties struct {
 	blockIntensity int
 }
 
+type ruleset struct {
+    color string
+    count int
+}
+
 type rule struct {
 	raw     string
-	ruleset map[string]int
+	ruleset []ruleset
 	color   string
 	usage   int
 }

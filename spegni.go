@@ -1,68 +1,53 @@
 package main
 
+
 func spegni(p piano, x, y int) {
 	tile := piastrella{x: x, y: y}
+	root := p.Find(tile)
+
 	if _, exists := p.tiles[tile]; !exists {
 		return
 	}
 
-	root := p.Find(tile)
-    originalBlockIntensity := p.tiles[root].blockIntensity
-    
-	p.tiles[root].blockIntensity -= p.tiles[tile].intensity
-
-	delete(p.tiles, tile)
+    if tile == root {
+        cambiaRadice(p, root)
+    }
 
 	adiacenti := getAdiacenti(x, y)
-	var otherBlocks []map[piastrella]*properties
 	seen := make(map[piastrella]bool)
 	seen[tile] = true
+	otherBlocks := make([]map[piastrella]*properties, 0)
 
 	for _, adj := range adiacenti {
 		if _, exists := p.tiles[adj]; exists && !seen[adj] {
-			if p.Find(adj) == root {
-				newBlock := esploraBlocco(p, adj, seen)
-				otherBlocks = append(otherBlocks, newBlock)
-			}
+			newBlock := trovaBlocco(p, adj, seen)
+			otherBlocks = append(otherBlocks, newBlock)
 		}
 	}
-
-    totalLostIntensity := 0
 
 	for _, block := range otherBlocks {
 		var newRoot piastrella
-		blockIntensity := 0
-        maxRank := 0
+		totalIntensity := 0
+		maxRank := 0
 
 		for t := range block {
-			blockIntensity += p.tiles[t].intensity
-			if p.tiles[t].rank > maxRank {
-                maxRank = p.tiles[t].rank
-            }
-            if newRoot == (piastrella{}) {
-                newRoot = t
-            }
-		}
-
-		for t := range block {
+			totalIntensity += p.tiles[t].intensity
+			maxRank++
+			if newRoot == (piastrella{}) {
+				newRoot = t
+			}
 			p.tiles[t].parent = newRoot
+            if p.tiles[t].blockIntensity > p.tiles[t].intensity {
+                p.tiles[t].blockIntensity = p.tiles[t].intensity
+            }
+            if p.tiles[t].rank > 0 {
+                p.tiles[t].rank = 0
+            }
 		}
 
-		p.tiles[newRoot].blockIntensity = blockIntensity
-        p.tiles[newRoot].rank = maxRank
-		totalLostIntensity += blockIntensity
-
-        if p.tiles[root].blockIntensity < originalBlockIntensity - totalLostIntensity {
-            p.tiles[root].blockIntensity = originalBlockIntensity - totalLostIntensity
-        } else {
-            p.tiles[root].blockIntensity -= totalLostIntensity
-        }
-
-        if p.tiles[root].blockIntensity == 0 {
-            p.tiles[root].rank = 0
-        }
+		p.tiles[newRoot].blockIntensity = totalIntensity
+		p.tiles[newRoot].rank = maxRank
 	}
 
-	p.tiles[root].blockIntensity -= originalBlockIntensity - totalLostIntensity
-    p.tiles[root].rank = 0
+    delete(p.tiles, tile)
 }

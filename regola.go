@@ -10,13 +10,16 @@ func regola(p piano, r string) {
 	var newRule rule
 	newRule.raw = r
 	newRule.color = rulesSplitted[1]
-	newRule.ruleset = make(map[string]int)
+	newRule.ruleset = make([]ruleset, 0)
 	for i := 2; i <= (len(rulesSplitted) - 2); i += 2 {
 		num, err := strconv.Atoi(rulesSplitted[i])
 		if err != nil {
 			return
 		}
-		newRule.ruleset[rulesSplitted[i+1]] = num
+        newRule.ruleset = append(newRule.ruleset, ruleset{
+            color: rulesSplitted[i+1],
+            count: num,
+        })
 	}
     //usg, _ := strconv.Atoi(rulesSplitted[len(rulesSplitted)-1])
 	//newRule.usage = usg
