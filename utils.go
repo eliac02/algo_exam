@@ -1,5 +1,4 @@
-//Elia Cortesi 01911A
-
+// Elia Cortesi 01911A
 package main
 
 // getAdiacenti returns the list of the tiles adjacents to the tile (x,y)
@@ -14,7 +13,7 @@ func getAdiacenti(x, y int) [8]piastrella {
 }
 
 // ruleOk checks if a rule can be applied to a tile
-// 
+//
 // @param reg The rule to check the validity of
 // @colorCount A map that contains the color of the tiles adjacents to a tile
 // @return bool True if the rule can be applied, False otherwise
@@ -28,11 +27,12 @@ func ruleOk(reg rule, colorCount map[string]int) bool {
 }
 
 // trovaBlocco finds all the tiles belonging to the block that the tile start belongs to
-// 
+//
 // @param p The system tiles-rules
 // @param start The tile which start the search from
+// @param filtro Lambda function that checks a given requirement
 // @return map[piastrella]*properties The block that the tile start belongs to
-func trovaBlocco(p piano, start piastrella, seen map[piastrella]bool) map[piastrella]*properties {
+func trovaBlocco(p piano, start piastrella, seen map[piastrella]bool, filtro func(p piastrella) bool) map[piastrella]*properties {
 	block := make(map[piastrella]*properties)
 	pila := []piastrella{start}
 
@@ -40,48 +40,23 @@ func trovaBlocco(p piano, start piastrella, seen map[piastrella]bool) map[piastr
 		current := pila[len(pila)-1]
 		pila = pila[:len(pila)-1]
 
-        if seen[current] {
-            continue
-        }
+		if seen[current] {
+			continue
+		}
 
-        seen[current] = true
-        block[current] = p.tiles[current]
+		seen[current] = true
+		block[current] = p.tiles[current]
 
 		adiacenti := getAdiacenti(current.x, current.y)
 		for _, adj := range adiacenti {
 			if _, exists := p.tiles[adj]; exists && !seen[adj] {
+				if filtro(adj) {
 					pila = append(pila, adj)
 				}
 			}
 		}
+	}
 	return block
-}
-
-func trovaBloccoOmogeneo(p piano, start piastrella, seen map[piastrella]bool) map[piastrella]*properties {
-    block := make(map[piastrella]*properties)
-    pila := []piastrella{start}
-    color := p.tiles[start].color
-
-    for len(pila) > 0 {
-        current := pila[len(pila)-1]
-        pila = pila[:len(pila)-1]
-        if seen[current] {
-            continue
-        }
-
-        seen[current] = true
-        block[current] = p.tiles[current]
-
-        adiacenti := getAdiacenti(current.x, current.y)
-        for _, adj := range adiacenti {
-            if _, exists := p.tiles[adj]; exists && !seen[adj] {
-                if p.tiles[adj].color == color {
-                    pila = append(pila, adj)
-                }
-            }
-        }
-    }
-    return block
 }
 
 // cambiaRadice change the root of a block
@@ -91,7 +66,9 @@ func trovaBloccoOmogeneo(p piano, start piastrella, seen map[piastrella]bool) ma
 func cambiaRadice(p piano, root piastrella) {
 	adiacenti := getAdiacenti(root.x, root.y)
 	seen := make(map[piastrella]bool)
-	block := trovaBlocco(p, root, seen)
+	block := trovaBlocco(p, root, seen, func(piastrella) bool {
+        return true
+    })
 	for _, adj := range adiacenti {
 		if _, exists := p.tiles[adj]; exists {
 			p.tiles[root].blockIntensity -= p.tiles[root].intensity
@@ -106,4 +83,3 @@ func cambiaRadice(p piano, root piastrella) {
 		}
 	}
 }
-

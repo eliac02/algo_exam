@@ -10,7 +10,9 @@ func propagaBlocco(p piano, x, y int) {
 	tile := piastrella{x: x, y: y}
     root := p.Find(tile)
 	seen := make(map[piastrella]bool)
-	block := trovaBlocco(p, root, seen)
+	block := trovaBlocco(p, root, seen, func(piastrella) bool {
+        return true
+    })
 
 	originalBlock := make(map[piastrella]*properties)
 	for t, props := range block {

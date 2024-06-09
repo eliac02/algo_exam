@@ -34,9 +34,6 @@ func esegui(p piano, s string) {
 		}
 		colora(p, x, y, tempSlice[3], i)
 	case "S", "?", "b", "B", "p", "P":
-		if len(tempSlice) != 3 {
-			return
-		}
 		x, err := strconv.Atoi(tempSlice[1])
 		if err != nil {
 			return

@@ -1,5 +1,4 @@
-//Elia Cortesi 01911A
-
+// Elia Cortesi 01911A
 package main
 
 // spegni removes from the system the tile (x,y)
@@ -14,9 +13,9 @@ func spegni(p piano, x, y int) {
 		return
 	}
 
-    if tile == root {
-        cambiaRadice(p, root)
-    }
+	if tile == root {
+		cambiaRadice(p, root)
+	}
 
 	adiacenti := getAdiacenti(x, y)
 	seen := make(map[piastrella]bool)
@@ -25,34 +24,38 @@ func spegni(p piano, x, y int) {
 
 	for _, adj := range adiacenti {
 		if _, exists := p.tiles[adj]; exists && !seen[adj] {
-			newBlock := trovaBlocco(p, adj, seen)
+			newBlock := trovaBlocco(p, adj, seen, func(piastrella) bool {
+				return true
+			})
 			otherBlocks = append(otherBlocks, newBlock)
 		}
 	}
 
-	for _, block := range otherBlocks {
-		var newRoot piastrella
-		totalIntensity := 0
-		maxRank := 0
+	if len(otherBlocks) > 0 {
+		for _, block := range otherBlocks {
+			var newRoot piastrella
+			totalIntensity := 0
+			maxRank := 0
 
-		for t := range block {
-			totalIntensity += p.tiles[t].intensity
-			maxRank++
-			if newRoot == (piastrella{}) {
-				newRoot = t
+			for t := range block {
+				totalIntensity += p.tiles[t].intensity
+				maxRank++
+				if newRoot == (piastrella{}) {
+					newRoot = t
+				}
+				p.tiles[t].parent = newRoot
+				if p.tiles[t].blockIntensity > p.tiles[t].intensity {
+					p.tiles[t].blockIntensity = p.tiles[t].intensity
+				}
+				if p.tiles[t].rank > 0 {
+					p.tiles[t].rank = 0
+				}
 			}
-			p.tiles[t].parent = newRoot
-            if p.tiles[t].blockIntensity > p.tiles[t].intensity {
-                p.tiles[t].blockIntensity = p.tiles[t].intensity
-            }
-            if p.tiles[t].rank > 0 {
-                p.tiles[t].rank = 0
-            }
-		}
 
-		p.tiles[newRoot].blockIntensity = totalIntensity
-		p.tiles[newRoot].rank = maxRank
+			p.tiles[newRoot].blockIntensity = totalIntensity
+			p.tiles[newRoot].rank = maxRank
+		}
 	}
 
-    delete(p.tiles, tile)
+	delete(p.tiles, tile)
 }
