@@ -14,11 +14,10 @@ func bloccoOmog(p piano, x, y int) {
 		fmt.Println("0")
 		return
 	}
-    root := p.Find(tile)
 	sum := 0
     block := make(map[piastrella]*properties)
     seen := make(map[piastrella]bool)
-    block = trovaBlocco(p, root, seen)
+    block = trovaBloccoOmogeneo(p, tile, seen)
     for t := range block {
         if p.tiles[t].color == p.tiles[tile].color {
             sum += p.tiles[t].intensity

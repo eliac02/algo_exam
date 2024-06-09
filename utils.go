@@ -57,6 +57,33 @@ func trovaBlocco(p piano, start piastrella, seen map[piastrella]bool) map[piastr
 	return block
 }
 
+func trovaBloccoOmogeneo(p piano, start piastrella, seen map[piastrella]bool) map[piastrella]*properties {
+    block := make(map[piastrella]*properties)
+    pila := []piastrella{start}
+    color := p.tiles[start].color
+
+    for len(pila) > 0 {
+        current := pila[len(pila)-1]
+        pila = pila[:len(pila)-1]
+        if seen[current] {
+            continue
+        }
+
+        seen[current] = true
+        block[current] = p.tiles[current]
+
+        adiacenti := getAdiacenti(current.x, current.y)
+        for _, adj := range adiacenti {
+            if _, exists := p.tiles[adj]; exists && !seen[adj] {
+                if p.tiles[adj].color == color {
+                    pila = append(pila, adj)
+                }
+            }
+        }
+    }
+    return block
+}
+
 // cambiaRadice change the root of a block
 //
 // @param p The system tiles-rules
