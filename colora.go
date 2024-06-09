@@ -10,7 +10,11 @@ package main
 // @param i The intensity of the color
 func colora(p piano, x, y int, alpha string, i int) {
     var tile = piastrella{x: x, y: y}
+    
+    //create the tile and add it to the system
     p.Add(tile, alpha, i)
+
+    //if it has adjacents execute the Unions
     var adiacenti = getAdiacenti(x, y)
     for _, adj := range adiacenti {
         if _, exists := p.tiles[adj]; exists {

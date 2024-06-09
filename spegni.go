@@ -13,10 +13,12 @@ func spegni(p piano, x, y int) {
 		return
 	}
 
+    //if the tile is the root, change the root
 	if tile == root {
 		cambiaRadice(p, root)
 	}
 
+    //retrieve the new blocks that may have been created
 	adiacenti := getAdiacenti(x, y)
 	seen := make(map[piastrella]bool)
 	seen[tile] = true
@@ -31,6 +33,7 @@ func spegni(p piano, x, y int) {
 		}
 	}
 
+    //fix the information of the new blocks
 	if len(otherBlocks) > 0 {
 		for _, block := range otherBlocks {
 			var newRoot piastrella
@@ -57,5 +60,6 @@ func spegni(p piano, x, y int) {
 		}
 	}
 
+    //ddelete the tile from the system
 	delete(p.tiles, tile)
 }

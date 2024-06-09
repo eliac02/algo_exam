@@ -8,6 +8,8 @@ package main
 // @param x y The coordinates of the tile
 func propagaBlocco(p piano, x, y int) {
 	tile := piastrella{x: x, y: y}
+
+    //retrieve the block
     root := p.Find(tile)
 	seen := make(map[piastrella]bool)
 	block := trovaBlocco(p, root, seen, func(piastrella) bool {
@@ -25,6 +27,7 @@ func propagaBlocco(p piano, x, y int) {
 		}
 	}
 
+    //check for every tile if a rule can be applied
 	for t := range block {
 		colorCount := make(map[string]int)
 		adiacenti := getAdiacenti(t.x, t.y)

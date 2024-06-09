@@ -8,6 +8,8 @@ package main
 // @param x y The coordinates of the tile
 func propaga(p piano, x, y int) {
 	tile := piastrella{x: x, y: y}
+
+    //retrieve the adjacent colors
 	colorCount := make(map[string]int)
 	adiacenti := getAdiacenti(x, y)
 	for _, adj := range adiacenti {
@@ -16,6 +18,7 @@ func propaga(p piano, x, y int) {
 		}
 	}
 
+    //check if a rule can be applied
 	for index, reg := range *p.rules {
 		if ruleOk(reg, colorCount) {
 			if _, exists := p.tiles[tile]; exists {

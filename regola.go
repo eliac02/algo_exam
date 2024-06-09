@@ -13,6 +13,8 @@ import (
 // @param r The command given to the program
 func regola(p piano, r string) {
 	rulesSplitted := strings.Split(r, " ")
+
+    //create the rule and add it to the system
 	var newRule rule
 	newRule.raw = r
 	newRule.color = rulesSplitted[1]

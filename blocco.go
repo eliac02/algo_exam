@@ -13,6 +13,7 @@ import (
 func blocco(p piano, x, y int) {
     tile := piastrella{x: x, y: y}
 	if _, exists := p.tiles[tile]; exists {
+        // find root of tile's block and get blockintensity
 		root := p.Find(tile)
 		fmt.Println(p.tiles[root].blockIntensity)
 	} else {

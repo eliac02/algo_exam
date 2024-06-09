@@ -10,6 +10,7 @@ import (
 //
 // @param p The system tiles-rules
 func stampa(p piano) {
+    //print the rules
     fmt.Println("(")
     for _, rule := range *p.rules {
         fmt.Printf("%s: ", rule.color)

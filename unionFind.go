@@ -6,6 +6,7 @@ package main
 //
 // @return piano The system tiles-rules created
 func makeSet() piano {
+    //create the system
     rules := make([]rule, 0)
     return piano{
         tiles: make(map[piastrella]*properties),
@@ -18,6 +19,7 @@ func makeSet() piano {
 // @param x The tile
 // @return piastrella The root of the block
 func (p piano) Find(x piastrella) piastrella {
+    //find the root of the block
     if p.tiles[x].parent != x {
         p.tiles[x].parent = p.Find(p.tiles[x].parent)
     }
@@ -28,6 +30,7 @@ func (p piano) Find(x piastrella) piastrella {
 // 
 // @param x y The coordinates of the tile
 func (p piano) Union(x, y piastrella) {
+    //unify the two blocks depending on their ranks
     rootX := p.Find(x)
     rootY := p.Find(y)
 

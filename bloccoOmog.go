@@ -1,5 +1,4 @@
-//Elia Cortesi 01911A
-
+// Elia Cortesi 01911A
 package main
 
 import "fmt"
@@ -14,15 +13,21 @@ func bloccoOmog(p piano, x, y int) {
 		fmt.Println("0")
 		return
 	}
-    color := p.tiles[tile].color
+
+	// retrieve the color of the tile
+	color := p.tiles[tile].color
 	sum := 0
-    block := make(map[piastrella]*properties)
-    seen := make(map[piastrella]bool)
-    block = trovaBlocco(p, tile, seen, func(adj piastrella) bool {
-        return p.tiles[adj].color ==  color
-    })
-    for t := range block {
-            sum += p.tiles[t].intensity
-    }
-    fmt.Println(sum)
+	block := make(map[piastrella]*properties)
+	seen := make(map[piastrella]bool)
+
+    // use the color of tile as a condition in the filter lambda function
+	block = trovaBlocco(p, tile, seen, func(adj piastrella) bool {
+		return p.tiles[adj].color == color
+	})
+
+    //calculate total intensity
+	for t := range block {
+		sum += p.tiles[t].intensity
+	}
+	fmt.Println(sum)
 }
