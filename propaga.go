@@ -1,3 +1,5 @@
+//Elia Cortesi 01911A
+
 package main
 
 func propaga(p piano, x, y int) {

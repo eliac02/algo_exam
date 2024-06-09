@@ -1,3 +1,5 @@
+//Elia Cortesi 01911A
+
 package main
 
 func propagaBlocco(p piano, x, y int) {

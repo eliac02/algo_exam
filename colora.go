@@ -1,3 +1,5 @@
+//Elia Cortesi 01911A
+
 package main
 
 func colora(p piano, x, y int, alpha string, i int) {

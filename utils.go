@@ -1,3 +1,5 @@
+//Elia Cortesi 01911A
+
 package main
 
 func getAdiacenti(x, y int) [8]piastrella {
