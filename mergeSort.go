@@ -2,6 +2,10 @@
 
 package main
 
+// merge merges to sorted arrays in one single sorted array
+// 
+// @param left right Two arrays of rule
+// @return []rule The sorted array of rules
 func merge(left, right []rule) []rule {
 	sorted := make([]rule, 0, len(left)+len(right))
 	i, j := 0, 0
@@ -21,6 +25,9 @@ func merge(left, right []rule) []rule {
 	return sorted
 }
 
+// mergeSort sorts an array with O(n*(log(n))) time complexity and O(n) space complexity
+//
+// @param arr The pointer to the array containing the rules of the system
 func mergeSort(arr *[]rule) {
 	if len(*arr) <= 1 {
 		return

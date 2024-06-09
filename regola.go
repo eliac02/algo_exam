@@ -7,6 +7,10 @@ import (
 	"strings"
 )
 
+// regola inserts the rule in the list of rules of the system
+//
+// @param p The system tiles-rules
+// @param r The command given to the program
 func regola(p piano, r string) {
 	rulesSplitted := strings.Split(r, " ")
 	var newRule rule

@@ -6,6 +6,9 @@ import (
     "fmt"
 )
 
+// stampa prints the list of the rules of the system
+//
+// @param p The system tiles-rules
 func stampa(p piano) {
     fmt.Println("(")
     for _, rule := range *p.rules {

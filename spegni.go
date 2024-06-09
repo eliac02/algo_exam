@@ -2,7 +2,10 @@
 
 package main
 
-
+// spegni removes from the system the tile (x,y)
+//
+// @param p The system tiles-rules
+// @param x y The coordinates of the tile
 func spegni(p piano, x, y int) {
 	tile := piastrella{x: x, y: y}
 	root := p.Find(tile)

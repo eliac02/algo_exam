@@ -2,6 +2,9 @@
 
 package main
 
+// makeSet creates a system tiles-rules
+//
+// @return piano The system tiles-rules created
 func makeSet() piano {
     rules := make([]rule, 0)
     return piano{
@@ -10,6 +13,10 @@ func makeSet() piano {
     }
 }
 
+// Find is a method that finds the root of the block the tile x belongs to using path compression
+//
+// @param x The tile
+// @return piastrella The root of the block
 func (p piano) Find(x piastrella) piastrella {
     if p.tiles[x].parent != x {
         p.tiles[x].parent = p.Find(p.tiles[x].parent)
@@ -17,6 +24,9 @@ func (p piano) Find(x piastrella) piastrella {
     return p.tiles[x].parent
 }
 
+// Union is a method that unifies to sets of tiles using union by rank
+// 
+// @param x y The coordinates of the tile
 func (p piano) Union(x, y piastrella) {
     rootX := p.Find(x)
     rootY := p.Find(y)
@@ -42,6 +52,11 @@ func (p piano) Union(x, y piastrella) {
     }
 }
 
+// Add is a method taht creates the tile and colors it
+// 
+// @param x The tile
+// @param c The color
+// @param i The intensity of the color
 func (p piano) Add(x piastrella, c string, i int) {
     if _, exists := p.tiles[x]; !exists {
         p.tiles[x] = &properties{color: c, intensity: i, parent: x, rank: 0, blockIntensity: i}

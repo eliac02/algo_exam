@@ -2,6 +2,10 @@
 
 package main
 
+// propaga applies the first available rule to the tile (x,y)
+//
+// @param p The system of tiles-rules
+// @param x y The coordinates of the tile
 func propaga(p piano, x, y int) {
 	tile := piastrella{x: x, y: y}
 	colorCount := make(map[string]int)

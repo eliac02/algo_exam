@@ -2,6 +2,12 @@
 
 package main
 
+// colora adds a tile to the system tiles-rules and colors it with a color and an intensity of color. If the tile exists already, colora updates it's color and intensity
+//
+// @param p The system of tiles-rules
+// @param x y The coordinates of the tile
+// @param alpha The color of the tile
+// @param i The intensity of the color
 func colora(p piano, x, y int, alpha string, i int) {
     var tile = piastrella{x: x, y: y}
     p.Add(tile, alpha, i)

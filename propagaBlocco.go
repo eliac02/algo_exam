@@ -2,6 +2,10 @@
 
 package main
 
+// propagaBlocco applies the first rule available to each of the tiles of the block that the tile (x,y) belongs to
+//
+// @param p The system tiles-rules
+// @param x y The coordinates of the tile
 func propagaBlocco(p piano, x, y int) {
 	tile := piastrella{x: x, y: y}
     root := p.Find(tile)

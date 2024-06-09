@@ -7,6 +7,10 @@ import (
 	"strings"
 )
 
+// esegui executes the command that's been given
+//
+// @param p The system tiles-rules
+// @param s The command given to the program
 func esegui(p piano, s string) {
 	tempSlice := strings.Split(s, " ")
 	command := tempSlice[0]
