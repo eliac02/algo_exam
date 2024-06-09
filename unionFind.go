@@ -25,11 +25,13 @@ func (p piano) Union(x, y piastrella) {
             p.tiles[rootX].rank += p.tiles[rootY].rank+1
             p.tiles[rootY].rank = 0
             p.tiles[rootX].blockIntensity += p.tiles[rootY].blockIntensity
+            p.tiles[rootY].blockIntensity = p.tiles[rootY].intensity
         } else if p.tiles[rootY].rank > p.tiles[rootX].rank {
             p.tiles[rootX].parent = rootY
             p.tiles[rootY].rank += p.tiles[rootX].rank+1
             p.tiles[rootX].rank = 0
             p.tiles[rootY].blockIntensity += p.tiles[rootX].blockIntensity
+            p.tiles[rootX].blockIntensity = p.tiles[rootX].intensity
         } else {
             p.tiles[rootX].parent = rootY
             p.tiles[rootY].rank++
