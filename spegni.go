@@ -7,11 +7,12 @@ package main
 // @param x y The coordinates of the tile
 func spegni(p piano, x, y int) {
 	tile := piastrella{x: x, y: y}
-	root := p.Find(tile)
 
 	if _, exists := p.tiles[tile]; !exists {
 		return
 	}
+
+    root := p.Find(tile)
 
     //if the tile is the root, change the root
 	if tile == root {

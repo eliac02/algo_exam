@@ -13,10 +13,11 @@ import (
 // @return string The color of the tile
 // @return int The intensity of the color of the tile
 func stato(p piano, x, y int) (string, int) {
+    tile := piastrella{x:x,y:y}
     //if the tile exists print its informations
-	if _, exists := p.tiles[piastrella{x, y}]; exists {
-		fmt.Printf("%s %d\n", p.tiles[piastrella{x, y}].color, p.tiles[piastrella{x, y}].intensity)
-		return p.tiles[piastrella{x, y}].color, p.tiles[piastrella{x, y}].intensity
+	if _, exists := p.tiles[tile]; exists {
+		fmt.Printf("%s %d\n", p.tiles[tile].color, p.tiles[tile].intensity)
+		return p.tiles[tile].color, p.tiles[tile].intensity
 	} else {
 		return "", 0
 	}
