@@ -1,0 +1,28 @@
+(
+azzurro 9
+rosso 2
+azzurro 7
+viola 1
+rosso 5
+rosso 2
+verde 1
+verde 2
+viola 6
+)
+(
+viola 9
+verde 4
+rosso 3
+rosso 9
+rosso 4
+giallo 8
+rosso 9
+azzurro 1
+verde 4
+viola 9
+)
+3
+4
+2
+8
+10

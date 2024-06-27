@@ -33,7 +33,22 @@ func esegui(p piano, s string) {
 			return
 		}
 		colora(p, x, y, tempSlice[3], i)
-	case "S", "?", "b", "B", "p", "P":
+    case "L":
+        x1, err := strconv.Atoi(tempSlice[1])
+		if err != nil {
+			return
+		}
+		y1, err := strconv.Atoi(tempSlice[2])
+		if err != nil {
+			return
+		}
+		x2, err := strconv.Atoi(tempSlice[3])
+		if err != nil {
+			return
+		}
+        y2, err := strconv.Atoi(tempSlice[4])
+        lung(p, x1, y1, x2, y2)
+	case "S", "?", "b", "B", "p", "P", "t":
 		x, err := strconv.Atoi(tempSlice[1])
 		if err != nil {
 			return
@@ -55,6 +70,8 @@ func esegui(p piano, s string) {
 			propaga(p, x, y)
 		case "P":
 			propagaBlocco(p, x, y)
+        case "t":
+            pista(p, x, y, s)
 		}
 	case "r":
 		regola(p, s)

@@ -20,11 +20,13 @@ func pista(p piano, x, y int, s string) {
 	}
 
 	directions := strings.Split(s, " ")
+    directions = directions[3:]
 
 	// if the directions are valid print the tiles
 	flag, sequence := verificaPista(p, x, y, directions)
 	if flag {
 		fmt.Println("(")
+        fmt.Printf("%s %d\n", p.tiles[tile].color, p.tiles[tile].intensity)
 		for _, el := range sequence {
 			fmt.Printf("%s %d\n", p.tiles[el].color, p.tiles[el].intensity)
 		}
