@@ -2,10 +2,9 @@
 
 package main
 
-// ordina sorts the list of rules with insertionSort depending on their usage
+// ordina sorts the list of rules depending on their usage
 //
 // @param p The system tiles-rules
 func ordina(p piano) {
-    //mergeSort(p.rules)
-    insertionSort(p.rules)
+    linkedCountingSort(p.rules)
 }

@@ -13,9 +13,9 @@ func stampa(p piano) {
     //print the rules
     fmt.Println("(")
     for _, rule := range *p.rules {
-        fmt.Printf("%s: ", rule.color)
+        fmt.Printf("%s:", rule.color)
         for _, rs := range rule.ruleset {
-            fmt.Printf("%d %s", rs.count, rs.color, )
+            fmt.Printf(" %d %s", rs.count, rs.color, )
         }
         fmt.Println()
     }

@@ -1,6 +1,8 @@
 // Elia Cortesi 01911A
 package main
 
+import "strings"
+
 // getAdiacenti returns the list of the tiles adjacents to the tile (x,y)
 //
 // @param x y The coordinates of the tile
@@ -96,19 +98,21 @@ func cambiaRadice(p piano, root piastrella) {
 // @param x y The coordinates of the tile
 // @param directions The list of directions
 // @return bool True if the sequence is valid, False otherwise
-func verificaPista(p piano, x, y int, directions []string) (bool, []piastrella) {
+func verificaPista(p piano, x, y int, s string) (bool, []piastrella) {
 	sequence := make([]piastrella, 0)
 	// assign to each direction an index
 	corresponding := map[string]int{
-		"N":  0,
+		"NN": 0,
 		"NO": 1,
-		"O":  2,
+		"OO": 2,
 		"SO": 3,
-		"S":  4,
+		"SS": 4,
 		"SE": 5,
-		"E":  6,
+		"EE": 6,
 		"NE": 7,
 	}
+
+	directions := strings.Split(s, ",")
 
 	// check one-by-one if all the directions are valid
 	for _, dir := range directions {
@@ -132,7 +136,7 @@ func verificaPista(p piano, x, y int, directions []string) (bool, []piastrella) 
 func camminoMinimo(p piano, start, end piastrella) int {
 	coda := []piastrella{start}
 	distanze := make(map[piastrella]int)
-	distanze[start] = 0
+	distanze[start] = 1
 
 	// use a BFS to calculate the shortest path
 	for len(coda) > 0 {

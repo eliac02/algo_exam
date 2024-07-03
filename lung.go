@@ -22,7 +22,12 @@ func lung(p piano, x1, y1, x2, y2 int) {
 		return
 	}
 
-	// calculate the shortest path
-	lung := camminoMinimo(p, start, end)
-	fmt.Println(lung)
+	if start == end {
+		// easy
+		fmt.Println(1)
+	} else {
+		// calculate the shortest path
+		lung := camminoMinimo(p, start, end)
+		fmt.Println(lung)
+	}
 }

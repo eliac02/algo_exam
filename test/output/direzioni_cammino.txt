@@ -1,28 +1,29 @@
-(
-azzurro 9
-rosso 2
-azzurro 7
-viola 1
-rosso 5
-rosso 2
-verde 1
-verde 2
-viola 6
-)
-(
-viola 9
-verde 4
-rosso 3
-rosso 9
-rosso 4
-giallo 8
-rosso 9
-azzurro 1
-verde 4
-viola 9
-)
-3
+[
+0 2 azzurro 9
+0 2 rosso 2
+0 2 azzurro 7
+0 2 viola 1
+0 2 rosso 5
+0 2 rosso 2
+0 2 verde 1
+0 2 verde 2
+0 2 viola 6
+]
+[
+7 5 viola 9
+7 5 verde 4
+7 5 rosso 3
+7 5 rosso 9
+7 5 rosso 4
+7 5 giallo 8
+7 5 rosso 9
+7 5 azzurro 1
+7 5 verde 4
+7 5 viola 9
+]
 4
-2
-8
-10
+5
+3
+9
+11
+1

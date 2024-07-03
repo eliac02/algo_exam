@@ -26,8 +26,8 @@ C 7 5 viola 9
 C 8 7 blu 9
 C 8 6 blu 5
 C 9 6 giallo 7
-t 0 2 N E S E N SE S O
-t 7 5 NO O NO SO N E E SE SE
+t 0 2 NN,EE,SS,EE,NN,SE,SS,OO
+t 7 5 NO,OO,NO,SO,NN,EE,EE,SE,SE
 L 2 1 1 4
 L 5 6 9 6
 L 5 4 7 2
@@ -36,4 +36,5 @@ C 6 4 verde 1
 L 1 1 5 7
 C 8 1 rosso 1
 L 2 7 7 0
+L 4 3 4 3
 q
