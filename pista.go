@@ -28,7 +28,7 @@ func pista(p piano, x, y int, s string) {
 		fmt.Println("[")
         fmt.Printf("%d %d %s %d\n", tile.x, tile.y, p.tiles[tile].color, p.tiles[tile].intensity)
 		for _, el := range sequence {
-			fmt.Printf("%d %d %s %d\n", tile.x, tile.y, p.tiles[el].color, p.tiles[el].intensity)
+			fmt.Printf("%d %d %s %d\n", el.x, el.y, p.tiles[el].color, p.tiles[el].intensity)
 		}
 		fmt.Println("]")
 	} else {
