@@ -1,5 +1,4 @@
-//Elia Cortesi 01911A
-
+// Elia Cortesi 01911A
 package main
 
 import (
@@ -13,8 +12,8 @@ import (
 // @return string The color of the tile
 // @return int The intensity of the color of the tile
 func stato(p piano, x, y int) (string, int) {
-    tile := piastrella{x:x,y:y}
-    //if the tile exists print its informations
+	tile := piastrella{x: x, y: y}
+	// if the tile exists print its informations
 	if _, exists := p.tiles[tile]; exists {
 		fmt.Printf("%s %d\n", p.tiles[tile].color, p.tiles[tile].intensity)
 		return p.tiles[tile].color, p.tiles[tile].intensity

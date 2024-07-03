@@ -20,12 +20,12 @@ func bloccoOmog(p piano, x, y int) {
 	block := make(map[piastrella]*properties)
 	seen := make(map[piastrella]bool)
 
-    // use the color of tile as a condition in the filter lambda function
+	// use the color of tile as a condition in the filter lambda function
 	block = trovaBlocco(p, tile, seen, func(adj piastrella) bool {
 		return p.tiles[adj].color == color
 	})
 
-    //calculate total intensity
+	// calculate total intensity
 	for t := range block {
 		sum += p.tiles[t].intensity
 	}

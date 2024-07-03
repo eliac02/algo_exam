@@ -1,5 +1,4 @@
-//Elia Cortesi 01911A
-
+// Elia Cortesi 01911A
 package main
 
 // colora adds a tile to the system tiles-rules and colors it with a color and an intensity of color. If the tile exists already, colora updates it's color and intensity
@@ -9,16 +8,16 @@ package main
 // @param alpha The color of the tile
 // @param i The intensity of the color
 func colora(p piano, x, y int, alpha string, i int) {
-    var tile = piastrella{x: x, y: y}
-    
-    //create the tile and add it to the system
-    p.Add(tile, alpha, i)
+	tile := piastrella{x: x, y: y}
 
-    //if it has adjacents execute the Unions
-    var adiacenti = getAdiacenti(x, y)
-    for _, adj := range adiacenti {
-        if _, exists := p.tiles[adj]; exists {
-            p.Union(tile, adj)
-        }
-    }
+	// create the tile and add it to the system
+	p.Add(tile, alpha, i)
+
+	// if it has adjacents execute the Unions
+	adiacenti := getAdiacenti(x, y)
+	for _, adj := range adiacenti {
+		if _, exists := p.tiles[adj]; exists {
+			p.Union(tile, adj)
+		}
+	}
 }

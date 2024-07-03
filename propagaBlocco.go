@@ -1,5 +1,4 @@
-//Elia Cortesi 01911A
-
+// Elia Cortesi 01911A
 package main
 
 // propagaBlocco applies the first rule available to each of the tiles of the block that the tile (x,y) belongs to
@@ -9,12 +8,12 @@ package main
 func propagaBlocco(p piano, x, y int) {
 	tile := piastrella{x: x, y: y}
 
-    //retrieve the block
-    root := p.Find(tile)
+	// retrieve the block
+	root := p.Find(tile)
 	seen := make(map[piastrella]bool)
 	block := trovaBlocco(p, root, seen, func(piastrella) bool {
-        return true
-    })
+		return true
+	})
 
 	originalBlock := make(map[piastrella]*properties)
 	for t, props := range block {
@@ -27,7 +26,7 @@ func propagaBlocco(p piano, x, y int) {
 		}
 	}
 
-    //check for every tile if a rule can be applied
+	// check for every tile if a rule can be applied
 	for t := range block {
 		colorCount := make(map[string]int)
 		adiacenti := getAdiacenti(t.x, t.y)

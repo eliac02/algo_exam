@@ -1,5 +1,4 @@
-//Elia Cortesi 01911A
-
+// Elia Cortesi 01911A
 package main
 
 import (
@@ -14,7 +13,7 @@ import (
 func regola(p piano, r string) {
 	rulesSplitted := strings.Split(r, " ")
 
-    //create the rule and add it to the system
+	// create the rule and add it to the system
 	var newRule rule
 	newRule.raw = r
 	newRule.color = rulesSplitted[1]
@@ -24,11 +23,11 @@ func regola(p piano, r string) {
 		if err != nil {
 			return
 		}
-        newRule.ruleset = append(newRule.ruleset, ruleset{
-            color: rulesSplitted[i+1],
-            count: num,
-        })
+		newRule.ruleset = append(newRule.ruleset, ruleset{
+			color: rulesSplitted[i+1],
+			count: num,
+		})
 	}
 	newRule.usage = 0
-    *p.rules = append(*p.rules, newRule)
+	*p.rules = append(*p.rules, newRule)
 }

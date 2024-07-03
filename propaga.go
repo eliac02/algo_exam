@@ -1,5 +1,4 @@
-//Elia Cortesi 01911A
-
+// Elia Cortesi 01911A
 package main
 
 // propaga applies the first available rule to the tile (x,y)
@@ -9,7 +8,7 @@ package main
 func propaga(p piano, x, y int) {
 	tile := piastrella{x: x, y: y}
 
-    //retrieve the adjacent colors
+	// retrieve the adjacent colors
 	colorCount := make(map[string]int)
 	adiacenti := getAdiacenti(x, y)
 	for _, adj := range adiacenti {
@@ -18,7 +17,7 @@ func propaga(p piano, x, y int) {
 		}
 	}
 
-    //check if a rule can be applied
+	// check if a rule can be applied
 	for index, reg := range *p.rules {
 		if ruleOk(reg, colorCount) {
 			if _, exists := p.tiles[tile]; exists {

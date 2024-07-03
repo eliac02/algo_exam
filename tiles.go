@@ -1,5 +1,4 @@
-//Elia Cortesi 01911A
-
+// Elia Cortesi 01911A
 package main
 
 import (
@@ -35,8 +34,8 @@ type properties struct {
 // color The color of the adjacent tile
 // count The number of the adjacents tile of color @color
 type ruleset struct {
-    color string
-    count int
+	color string
+	count int
 }
 
 // rule represents a rule of the system
