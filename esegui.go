@@ -60,7 +60,7 @@ func esegui(p piano, s string) {
 		case "S":
 			spegni(p, x, y)
 		case "?":
-			stato(p, x, y)
+			_, _ = stato(p, x, y)
 		case "b":
 			blocco(p, x, y)
 		case "B":

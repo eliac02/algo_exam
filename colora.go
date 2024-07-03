@@ -10,8 +10,14 @@ package main
 func colora(p piano, x, y int, alpha string, i int) {
 	tile := piastrella{x: x, y: y}
 
-	// create the tile and add it to the system
-	p.Add(tile, alpha, i)
+	// if intensity = 0 then turn off tile
+	if i <= 0 {
+		spegni(p, x, y)
+		return
+	} else {
+		// create the tile and add it to the system
+		p.Add(tile, alpha, i)
+	}
 
 	// if it has adjacents execute the Unions
 	adiacenti := getAdiacenti(x, y)
