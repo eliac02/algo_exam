@@ -1,24 +1,24 @@
 [
 0 2 azzurro 9
-0 2 rosso 2
-0 2 azzurro 7
-0 2 viola 1
-0 2 rosso 5
-0 2 rosso 2
-0 2 verde 1
-0 2 verde 2
-0 2 viola 6
+0 3 rosso 2
+1 3 azzurro 7
+1 2 viola 1
+2 2 rosso 5
+2 3 rosso 2
+3 2 verde 1
+3 1 verde 2
+2 1 viola 6
 ]
 [
 7 5 viola 9
-7 5 verde 4
-7 5 rosso 3
-7 5 rosso 9
-7 5 rosso 4
-7 5 giallo 8
-7 5 rosso 9
-7 5 azzurro 1
-7 5 verde 4
+6 6 verde 4
+5 6 rosso 3
+4 7 rosso 9
+3 6 rosso 4
+3 7 giallo 8
+4 7 rosso 9
+5 7 azzurro 1
+6 6 verde 4
 7 5 viola 9
 ]
 4
