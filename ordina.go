@@ -5,5 +5,5 @@ package main
 //
 // @param p The system tiles-rules
 func ordina(p piano) {
-	linkedCountingSort(p.rules)
+	bucketSort(p.rules)
 }

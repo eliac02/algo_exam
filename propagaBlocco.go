@@ -21,7 +21,7 @@ func propagaBlocco(p piano, x, y int) {
 			color:          props.color,
 			intensity:      props.intensity,
 			parent:         props.parent,
-			rank:           props.rank,
+			size:           props.size,
 			blockIntensity: props.blockIntensity,
 		}
 	}

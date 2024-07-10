@@ -12,7 +12,6 @@ func colora(p piano, x, y int, alpha string, i int) {
 
 	// if intensity = 0 then turn off tile
 	if i <= 0 {
-		spegni(p, x, y)
 		return
 	} else {
 		// create the tile and add it to the system

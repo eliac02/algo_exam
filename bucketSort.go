@@ -2,10 +2,10 @@
 
 package main
 
-// linkedCountingSort sorts the list of rules with O(n+k) time complexity, where n is the number of rules and k is the usage of the most-used rule
+// bucketSort sorts the list of rules with O(n+k) time complexity, where n is the number of rules and k is the usage of the most-used rule
 //
 // @param The pointer to the array containing all the rules of the system
-func linkedCountingSort(arr *[]rule) {
+func bucketSort(arr *[]rule) {
 	if len(*arr) == 0 {
 		return
 	}

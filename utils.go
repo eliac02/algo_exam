@@ -80,9 +80,9 @@ func cambiaRadice(p piano, root piastrella) {
 	for _, adj := range adiacenti {
 		if _, exists := p.tiles[adj]; exists {
 			p.tiles[root].blockIntensity -= p.tiles[root].intensity
-			p.tiles[root].rank--
+			p.tiles[root].size--
 			p.tiles[adj].blockIntensity = p.tiles[root].blockIntensity
-			p.tiles[adj].rank = p.tiles[root].rank
+			p.tiles[adj].size = p.tiles[root].size
 			p.tiles[adj].parent = adj
 			for t := range block {
 				p.tiles[t].parent = adj

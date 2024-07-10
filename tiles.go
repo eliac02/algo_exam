@@ -19,13 +19,13 @@ type piastrella struct {
 // color The color of the tile
 // intensity The intensity of the color
 // parent The parent the tile is referring to
-// rank The number of tiles that refers to the tile
+// size The number of tiles that refers to the tile
 // blockIntensity The sum of the intensity of the tiles that refers to the tile
 type properties struct {
 	color          string
 	intensity      int
 	parent         piastrella
-	rank           int
+	size           int
 	blockIntensity int
 }
 
@@ -40,12 +40,10 @@ type ruleset struct {
 
 // rule represents a rule of the system
 //
-// raw The raw command given to the program
 // ruleset The list of required adjacent tiles
 // color The color that the rule gives to teh tile
 // usage The number of times the rule has been used
 type rule struct {
-	raw     string
 	ruleset []ruleset
 	color   string
 	usage   int

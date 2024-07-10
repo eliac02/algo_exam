@@ -20,35 +20,35 @@ func makeSet() piano {
 func (p piano) Find(x piastrella) piastrella {
 	// find the root of the block
 	if p.tiles[x].parent != x {
-		p.tiles[x].parent = p.Find(p.tiles[x].parent)
+		p.tiles[x].parent = p.Find(p.tiles[x].parent) //path compression
 	}
 	return p.tiles[x].parent
 }
 
-// Union is a method that unifies to sets of tiles using union by rank
+// Union is a method that unifies to sets of tiles using union by size
 //
 // @param x y The coordinates of the tile
 func (p piano) Union(x, y piastrella) {
-	// unify the two blocks depending on their ranks
+	// unify the two blocks depending on their sizes
 	rootX := p.Find(x)
 	rootY := p.Find(y)
 
 	if rootX != rootY {
-		if p.tiles[rootX].rank > p.tiles[rootY].rank {
+		if p.tiles[rootX].size > p.tiles[rootY].size {
 			p.tiles[rootY].parent = rootX
-			p.tiles[rootX].rank += p.tiles[rootY].rank + 1
-			p.tiles[rootY].rank = 0
+			p.tiles[rootX].size += p.tiles[rootY].size + 1
+			p.tiles[rootY].size = 0
 			p.tiles[rootX].blockIntensity += p.tiles[rootY].blockIntensity
 			p.tiles[rootY].blockIntensity = p.tiles[rootY].intensity
-		} else if p.tiles[rootY].rank > p.tiles[rootX].rank {
+		} else if p.tiles[rootY].size > p.tiles[rootX].size {
 			p.tiles[rootX].parent = rootY
-			p.tiles[rootY].rank += p.tiles[rootX].rank + 1
-			p.tiles[rootX].rank = 0
+			p.tiles[rootY].size += p.tiles[rootX].size + 1
+			p.tiles[rootX].size = 0
 			p.tiles[rootY].blockIntensity += p.tiles[rootX].blockIntensity
 			p.tiles[rootX].blockIntensity = p.tiles[rootX].intensity
 		} else {
 			p.tiles[rootX].parent = rootY
-			p.tiles[rootY].rank++
+			p.tiles[rootY].size++
 			p.tiles[rootY].blockIntensity += p.tiles[rootX].blockIntensity
 		}
 	}
@@ -61,7 +61,7 @@ func (p piano) Union(x, y piastrella) {
 // @param i The intensity of the color
 func (p piano) Add(x piastrella, c string, i int) {
 	if _, exists := p.tiles[x]; !exists {
-		p.tiles[x] = &properties{color: c, intensity: i, parent: x, rank: 0, blockIntensity: i}
+		p.tiles[x] = &properties{color: c, intensity: i, parent: x, size: 0, blockIntensity: i}
 	} else {
 		root := p.Find(x)
 		p.tiles[x].color = c

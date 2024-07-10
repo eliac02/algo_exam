@@ -15,7 +15,6 @@ func regola(p piano, r string) {
 
 	// create the rule and add it to the system
 	var newRule rule
-	newRule.raw = r
 	newRule.color = rulesSplitted[1]
 	newRule.ruleset = make([]ruleset, 0)
 	for i := 2; i <= (len(rulesSplitted) - 2); i += 2 {

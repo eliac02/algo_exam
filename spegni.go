@@ -39,11 +39,11 @@ func spegni(p piano, x, y int) {
 		for _, block := range otherBlocks {
 			var newRoot piastrella
 			totalIntensity := 0
-			maxRank := 0
+			maxSize := 0
 
 			for t := range block {
 				totalIntensity += p.tiles[t].intensity
-				maxRank++
+				maxSize++
 				if newRoot == (piastrella{}) {
 					newRoot = t
 				}
@@ -51,13 +51,13 @@ func spegni(p piano, x, y int) {
 				if p.tiles[t].blockIntensity > p.tiles[t].intensity {
 					p.tiles[t].blockIntensity = p.tiles[t].intensity
 				}
-				if p.tiles[t].rank > 0 {
-					p.tiles[t].rank = 0
+				if p.tiles[t].size > 0 {
+					p.tiles[t].size = 0
 				}
 			}
 
 			p.tiles[newRoot].blockIntensity = totalIntensity
-			p.tiles[newRoot].rank = maxRank
+			p.tiles[newRoot].size = maxSize
 		}
 	}
 
