@@ -1,7 +1,7 @@
 package algorithms
 
 import (
-    models "tiles/internal/models"
+	models "tiles/internal/models"
 )
 
 // Colora adds a tile to the system tiles-rules and colors it with a color and an intensity of color. If the tile exists already, colora updates it's color and intensity
@@ -10,15 +10,15 @@ import (
 // @param x y The coordinates of the tile
 // @param alpha The color of the tile
 // @param i The intensity of the color
-func Colora(p models.Piano, x, y int, alpha string, i int) {
+func Colora(p models.Piano, x, y int, hex string, i int) {
 	tile := models.Piastrella{X: x, Y: y}
 
-	// if intensity = 0 then turn off tile
+	// if intensity = 0 then ignore it
 	if i <= 0 {
 		return
 	} else {
 		// create the tile and add it to the system
-		p.Add(tile, alpha, i)
+		p.Add(tile, hex, i)
 	}
 
 	// if it has adjacents execute the Unions

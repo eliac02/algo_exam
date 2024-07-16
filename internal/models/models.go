@@ -63,11 +63,15 @@ type Piano struct {
 // Window The window of the app
 // Grid The grid representing the piano
 // Buttons The buttons of the several functions
+// Columns The number of columns of the grid
+// Rows The number of row of the grid
 type UI struct {
 	App     fyne.App
 	Window  fyne.Window
 	Grid    *fyne.Container
 	Buttons *map[Piastrella]widget.Button
+	Columns int
+	Rows    int
 }
 
 // Find is a method that finds the root of the block the tile x belongs to using path compression

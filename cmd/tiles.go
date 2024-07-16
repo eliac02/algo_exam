@@ -2,29 +2,23 @@
 package main
 
 import (
-    "tiles/internal/models"
-    "tiles/internal/algorithms"
+	"tiles/internal/algorithms"
+	"tiles/internal/gui"
+	"tiles/internal/models"
+
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/widget"
+	"fyne.io/fyne/v2/app"
 )
 
-
-
 func main() {
-	InitializeGUI()
+	a := app.New()
+	w := a.NewWindow("Digital Tiles")
+	p := algorithms.MakeSet()
 
-	// p := makeSet()
-	// grid := newDynamicGrid()
+    ui := &models.UI{App: a, Window: w}
 
-	button := widget.NewButton("Aggiungi elemento", showDialog)
+    gui.InitializeGUI(ui, p)
 
-	w.SetContent(container.NewVBox(button))
-
-	/*scanner := bufio.NewScanner(os.Stdin)
-	for scanner.Scan() {
-		esegui(p, scanner.Text())
-	}*/
-
-	w.ShowAndRun()
+    (*ui).Window.Resize(fyne.NewSize(800, 800))
+	(*ui).Window.ShowAndRun()
 }

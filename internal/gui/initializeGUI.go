@@ -1,25 +1,25 @@
 package gui
 
 import (
-	"tiles/internal/models"
+	models "tiles/internal/models"
 
-	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 )
 
-func InitializeGUI(a fyne.App, w fyne.Window) *models.UI {
-    buttons := make(map[models.Piastrella]widget.Button)
-	ui := &models.UI{
-		App:    a,
-		Window: w,
-		Buttons: &buttons,
-    }
+func InitializeGUI(ui *models.UI, p models.Piano) {
+	ui.Columns = 15
+	ui.Rows = 15
+
+	UpdateGrid(ui, p)
+
+	coloraButton := widget.NewButton("Colora", func() {
+		showColoraDialogTakeParam(ui.Window, p)
+		UpdateGrid(ui, p)
+	})
 
 	ui.Window.SetContent(container.NewHBox(
-	// griglia,
-	// bottoni,
+		ui.Grid,
+		coloraButton,
 	))
-
-	return ui
 }
