@@ -2,7 +2,7 @@ package models
 
 import (
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/widget"
+	"fyne.io/fyne/v2/canvas"
 )
 
 // Piastrella represents a tile of the system
@@ -69,7 +69,8 @@ type UI struct {
 	App     fyne.App
 	Window  fyne.Window
 	Grid    *fyne.Container
-	Buttons *map[Piastrella]widget.Button
+	Rects   [][]*canvas.Rectangle
+	Buttons *fyne.Container
 	Columns int
 	Rows    int
 }

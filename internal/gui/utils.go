@@ -25,34 +25,33 @@ func checkGridSize(ui *models.UI, x, y int) {
 	}
 }
 
+func initGrid(ui *models.UI) {
+	ui.Rects = make([][]*canvas.Rectangle, ui.Columns)
+	for i := range ui.Rects {
+		ui.Rects[i] = make([]*canvas.Rectangle, ui.Rows)
+		for j := range ui.Rects[i] {
+			ui.Rects[i][j] = canvas.NewRectangle(color.Transparent)
+			ui.Rects[i][j].StrokeColor = color.Gray{Y: 0xAA}
+			ui.Rects[i][j].StrokeWidth = 1
+            ui.Rects[i][j].SetMinSize(fyne.Size{Width: 60,Height: 40})
+		}
+	}
+	ui.Grid = container.NewGridWithColumns(ui.Columns)
+
+	for _, row := range ui.Rects {
+		for _, rect := range row {
+			ui.Grid.Add(rect)
+		}
+	}
+}
+
 // UpdateGrid updates the grid when a new tile is coloured
 //
 // @param ui The graphic interface
 // @param p The system tiles-rules
-func UpdateGrid(ui *models.UI, p models.Piano) {
-	ui.Grid = container.NewGridWithColumns(ui.Columns + 1)
-
-	for row := 0; row <= ui.Rows; row++ {
-		for col := 0; col <= ui.Columns; col++ {
-			tile := models.Piastrella{X: col, Y: row}
-			if _, exists := p.Tiles[tile]; !exists {
-				rect := canvas.NewRectangle(color.Transparent)
-				rect.StrokeColor = color.Gray{Y: 0xAA}
-				rect.StrokeWidth = 1
-				rect.SetMinSize(fyne.NewSize(40, 40))
-				ui.Grid.Add(rect)
-			} else {
-				col, _ := parseHexColor(p.Tiles[tile].Color)
-				rect := canvas.NewRectangle(col)
-				rect.StrokeColor = color.Gray{Y: 0xAA}
-				rect.StrokeWidth = 1
-				rect.SetMinSize(fyne.NewSize(40, 40))
-				ui.Grid.Add(rect)
-			}
-		}
-	}
-    
-    ui.Window.Content().Refresh()
+func UpdateCell(ui *models.UI, x, y int, hex color.Color) {
+	ui.Rects[y][x].FillColor = hex
+	ui.Rects[y][x].Refresh()
 }
 
 // parseHexColor parses the hexadecimal color of a tile in a color.Color object

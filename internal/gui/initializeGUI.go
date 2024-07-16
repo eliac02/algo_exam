@@ -11,11 +11,10 @@ func InitializeGUI(ui *models.UI, p models.Piano) {
 	ui.Columns = 15
 	ui.Rows = 15
 
-	UpdateGrid(ui, p)
+	initGrid(ui)
 
 	coloraButton := widget.NewButton("Colora", func() {
-		showColoraDialogTakeParam(ui.Window, p)
-		UpdateGrid(ui, p)
+		showColoraDialogTakeParam(ui, p)
 	})
 
 	ui.Window.SetContent(container.NewHBox(

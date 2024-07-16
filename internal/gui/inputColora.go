@@ -7,7 +7,6 @@ import (
 	"tiles/internal/algorithms"
 	"tiles/internal/models"
 
-	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
@@ -19,7 +18,7 @@ import (
 // @return x y The coordinates of the tile
 // @return hex The hexadecimal color of the tile
 // @intensity The intensity of the color of the tile
-func showColoraDialogTakeParam(win fyne.Window, p models.Piano) {
+func showColoraDialogTakeParam(ui *models.UI, p models.Piano) {
 	input1 := widget.NewEntry()
 	input1.SetPlaceHolder("Ascissa")
 	input2 := widget.NewEntry()
@@ -58,9 +57,15 @@ func showColoraDialogTakeParam(win fyne.Window, p models.Piano) {
 				if err != nil {
 					fmt.Println(err)
 				}
+				hex, err := parseHexColor(input3.Text)
+				if err != nil {
+					fmt.Println(err)
+				}
 
 				algorithms.Colora(p, x, y, input3.Text, i)
-                fmt.Println(p.Tiles[models.Piastrella{X: x, Y: y}].Color)
+
+                yFixed := ui.Rows-y-1
+				UpdateCell(ui, x, yFixed, hex)
 			}
 		},
 	}
@@ -68,7 +73,7 @@ func showColoraDialogTakeParam(win fyne.Window, p models.Piano) {
 	dialog.ShowCustom("Inserisci Parametri", "Ok", container.NewVBox(
 		form,
 		errorLabel,
-	), win)
+	), ui.Window)
 }
 
 // validateInput checks the correctness of the user's input
