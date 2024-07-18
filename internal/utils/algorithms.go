@@ -1,15 +1,15 @@
-package algorithms
+package utils
 
 import (
 	"strings"
 	models "tiles/internal/models"
 )
 
-// getAdiacenti returns the list of the tiles adjacents to the tile (x,y)
+// GetAdiacenti returns the list of the tiles adjacents to the tile (x,y)
 //
 // @param x y The coordinates of the tile
 // @return [8]piastrella The list of the tiles adjacents to the tile (x,y)
-func getAdiacenti(x, y int) [8]models.Piastrella {
+func GetAdiacenti(x, y int) [8]models.Piastrella {
 	// retrieve the adjacents tiles
 	adjs := [8]models.Piastrella{
 		{X: x, Y: y + 1}, {X: x - 1, Y: y + 1}, {X: x - 1, Y: y}, {X: x - 1, Y: y - 1}, {X: x, Y: y - 1}, {X: x + 1, Y: y - 1}, {X: x + 1, Y: y}, {X: x + 1, Y: y + 1},
@@ -17,12 +17,12 @@ func getAdiacenti(x, y int) [8]models.Piastrella {
 	return adjs
 }
 
-// ruleOk checks if a rule can be applied to a tile
+// RuleOk checks if a rule can be applied to a tile
 //
 // @param reg The rule to check the validity of
 // @colorCount A map that contains the color of the tiles adjacents to a tile
 // @return bool True if the rule can be applied, False otherwise
-func ruleOk(reg models.Rule, colorCount map[string]int) bool {
+func RuleOk(reg models.Rule, colorCount map[string]int) bool {
 	// check if the rule can be applied
 	for _, rs := range reg.Ruleset {
 		if colorCount[rs.Color] < rs.Count {
@@ -32,13 +32,13 @@ func ruleOk(reg models.Rule, colorCount map[string]int) bool {
 	return true
 }
 
-// trovaBlocco finds all the tiles belonging to the block that the tile start belongs to
+// TrovaBlocco finds all the tiles belonging to the block that the tile start belongs to
 //
 // @param p The system tiles-rules
 // @param start The tile which start the search from
 // @param filtro Lambda function that checks a given requirement
 // @return map[piastrella]*properties The block that the tile start belongs to
-func trovaBlocco(p models.Piano, start models.Piastrella, seen map[models.Piastrella]bool, filtro func(p models.Piastrella) bool) map[models.Piastrella]*models.Properties {
+func TrovaBlocco(p models.Piano, start models.Piastrella, seen map[models.Piastrella]bool, filtro func(p models.Piastrella) bool) map[models.Piastrella]*models.Properties {
 	block := make(map[models.Piastrella]*models.Properties)
 	pila := []models.Piastrella{start}
 
@@ -54,7 +54,7 @@ func trovaBlocco(p models.Piano, start models.Piastrella, seen map[models.Piastr
 		seen[current] = true
 		block[current] = p.Tiles[current]
 
-		adiacenti := getAdiacenti(current.X, current.Y)
+		adiacenti := GetAdiacenti(current.X, current.Y)
 		for _, adj := range adiacenti {
 			if _, exists := p.Tiles[adj]; exists && !seen[adj] {
 				// use a lambda function as a filter
@@ -67,14 +67,14 @@ func trovaBlocco(p models.Piano, start models.Piastrella, seen map[models.Piastr
 	return block
 }
 
-// cambiaRadice change the root of a block
+// CambiaRadice change the root of a block
 //
 // @param p The system tiles-rules
 // @param root The root that needs to be changes
-func cambiaRadice(p models.Piano, root models.Piastrella) {
-	adiacenti := getAdiacenti(root.X, root.Y)
+func CambiaRadice(p models.Piano, root models.Piastrella) {
+	adiacenti := GetAdiacenti(root.X, root.Y)
 	seen := make(map[models.Piastrella]bool)
-	block := trovaBlocco(p, root, seen, func(models.Piastrella) bool {
+	block := TrovaBlocco(p, root, seen, func(models.Piastrella) bool {
 		return true
 	})
 
@@ -94,13 +94,13 @@ func cambiaRadice(p models.Piano, root models.Piastrella) {
 	}
 }
 
-// verificaPista checks if the sequence of directions is valid
+// VerificaPista checks if the sequence of directions is valid
 //
 // @param p The system tiles-rules
 // @param x y The coordinates of the tile
 // @param directions The list of directions
 // @return bool True if the sequence is valid, False otherwise
-func verificaPista(p models.Piano, x, y int, s string) (bool, []models.Piastrella) {
+func VerificaPista(p models.Piano, x, y int, s string) (bool, []models.Piastrella) {
 	sequence := make([]models.Piastrella, 0)
 	// assign to each direction an index
 	corresponding := map[string]int{
@@ -118,7 +118,7 @@ func verificaPista(p models.Piano, x, y int, s string) (bool, []models.Piastrell
 
 	// check one-by-one if all the directions are valid
 	for _, dir := range directions {
-		adiacenti := getAdiacenti(x, y)
+		adiacenti := GetAdiacenti(x, y)
 		tile := adiacenti[corresponding[dir]]
 		if _, exists := p.Tiles[tile]; !exists {
 			return false, []models.Piastrella{}
@@ -129,13 +129,13 @@ func verificaPista(p models.Piano, x, y int, s string) (bool, []models.Piastrell
 	return true, sequence
 }
 
-// camminoMinimo calculate the shortest path from start to end
+// CamminoMinimo calculate the shortest path from start to end
 //
 // @param p The system tiles-rules
 // @param start The starting tile
 // @param end The ending tile
 // @return int The lenght of the shortest path between @start and @end
-func camminoMinimo(p models.Piano, start, end models.Piastrella) int {
+func CamminoMinimo(p models.Piano, start, end models.Piastrella) int {
 	coda := []models.Piastrella{start}
 	distanze := make(map[models.Piastrella]int)
 	distanze[start] = 1
@@ -149,7 +149,7 @@ func camminoMinimo(p models.Piano, start, end models.Piastrella) int {
 			return distanze[current]
 		}
 
-		adiacenti := getAdiacenti(current.X, current.Y)
+		adiacenti := GetAdiacenti(current.X, current.Y)
 		for _, adj := range adiacenti {
 			if _, exists := p.Tiles[adj]; exists {
 				if _, visited := distanze[adj]; !visited {
@@ -162,5 +162,3 @@ func camminoMinimo(p models.Piano, start, end models.Piastrella) int {
 
 	return 0
 }
-
-

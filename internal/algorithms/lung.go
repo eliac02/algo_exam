@@ -3,6 +3,7 @@ package algorithms
 import (
 	"fmt"
 	models "tiles/internal/models"
+	utils "tiles/internal/utils"
 )
 
 // Lung retrieve the lenght of the shortest path between two tiles
@@ -29,7 +30,7 @@ func Lung(p models.Piano, x1, y1, x2, y2 int) {
 		fmt.Println(1)
 	} else {
 		// calculate the shortest path
-		lung := camminoMinimo(p, start, end)
+		lung := utils.CamminoMinimo(p, start, end)
 		fmt.Println(lung)
 	}
 }

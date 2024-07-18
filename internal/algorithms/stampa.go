@@ -8,7 +8,7 @@ import (
 // Stampa prints the list of the rules of the system
 //
 // @param p The system tiles-rules
-func stampa(p models.Piano) {
+func Stampa(p models.Piano) {
 	// print the rules
 	fmt.Println("(")
 	for _, rule := range *p.Rules {

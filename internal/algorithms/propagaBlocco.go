@@ -1,6 +1,9 @@
 package algorithms
 
-import models "tiles/internal/models"
+import (
+	models "tiles/internal/models"
+	utils "tiles/internal/utils"
+)
 
 // PropagaBlocco applies the first rule available to each of the tiles of the block that the tile (x,y) belongs to
 //
@@ -12,7 +15,7 @@ func PropagaBlocco(p models.Piano, x, y int) {
 	// retrieve the block
 	root := p.Find(tile)
 	seen := make(map[models.Piastrella]bool)
-	block := trovaBlocco(p, root, seen, func(models.Piastrella) bool {
+	block := utils.TrovaBlocco(p, root, seen, func(models.Piastrella) bool {
 		return true
 	})
 
@@ -30,7 +33,7 @@ func PropagaBlocco(p models.Piano, x, y int) {
 	// check for every tile if a rule can be applied
 	for t := range block {
 		colorCount := make(map[string]int)
-		adiacenti := getAdiacenti(t.X, t.Y)
+		adiacenti := utils.GetAdiacenti(t.X, t.Y)
 		for _, adj := range adiacenti {
 			if props, exists := originalBlock[adj]; exists {
 				colorCount[props.Color]++
@@ -38,7 +41,7 @@ func PropagaBlocco(p models.Piano, x, y int) {
 		}
 
 		for index, reg := range *p.Rules {
-			if ruleOk(reg, colorCount) {
+			if utils.RuleOk(reg, colorCount) {
 				p.Tiles[t].Color = reg.Color
 				(*p.Rules)[index].Usage++
 				break

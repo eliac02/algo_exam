@@ -1,6 +1,9 @@
 package algorithms
 
-import models "tiles/internal/models"
+import (
+	models "tiles/internal/models"
+	utils "tiles/internal/utils"
+)
 
 // Spegni removes from the system the tile (x,y)
 //
@@ -17,18 +20,18 @@ func Spegni(p models.Piano, x, y int) {
 
 	// if the tile is the root, change the root
 	if tile == root {
-		cambiaRadice(p, root)
+		utils.CambiaRadice(p, root)
 	}
 
 	// retrieve the new blocks that may have been created
-	adiacenti := getAdiacenti(x, y)
+	adiacenti := utils.GetAdiacenti(x, y)
 	seen := make(map[models.Piastrella]bool)
 	seen[tile] = true
 	otherBlocks := make([]map[models.Piastrella]*models.Properties, 0)
 
 	for _, adj := range adiacenti {
 		if _, exists := p.Tiles[adj]; exists && !seen[adj] {
-			newBlock := trovaBlocco(p, adj, seen, func(models.Piastrella) bool {
+			newBlock := utils.TrovaBlocco(p, adj, seen, func(models.Piastrella) bool {
 				return true
 			})
 			otherBlocks = append(otherBlocks, newBlock)

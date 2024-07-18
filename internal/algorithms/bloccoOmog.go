@@ -1,8 +1,9 @@
 package algorithms
 
 import (
-    models "tiles/internal/models"
-    "fmt"
+	"fmt"
+	models "tiles/internal/models"
+	utils "tiles/internal/utils"
 )
 
 // BloccoOmog prints the sum of all the intensities of the tiles belonging to the block that the tile (x,y) belongs to, that are the same color of the tile (x,y)
@@ -23,7 +24,7 @@ func BloccoOmog(p models.Piano, x, y int) {
 	seen := make(map[models.Piastrella]bool)
 
 	// use the color of tile as a condition in the filter lambda function
-	block = trovaBlocco(p, tile, seen, func(adj models.Piastrella) bool {
+	block = utils.TrovaBlocco(p, tile, seen, func(adj models.Piastrella) bool {
 		return p.Tiles[adj].Color == color
 	})
 

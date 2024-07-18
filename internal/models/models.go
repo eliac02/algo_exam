@@ -1,8 +1,12 @@
 package models
 
 import (
+	"image/color"
+	"strconv"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
+	"fyne.io/fyne/v2/widget"
 )
 
 // Piastrella represents a tile of the system
@@ -55,24 +59,6 @@ type Rule struct {
 type Piano struct {
 	Tiles map[Piastrella]*Properties
 	Rules *[]Rule
-}
-
-// UI The graphic interface
-//
-// App The app itself
-// Window The window of the app
-// Grid The grid representing the piano
-// Buttons The buttons of the several functions
-// Columns The number of columns of the grid
-// Rows The number of row of the grid
-type UI struct {
-	App     fyne.App
-	Window  fyne.Window
-	Grid    *fyne.Container
-	Rects   [][]*canvas.Rectangle
-	Buttons *fyne.Container
-	Columns int
-	Rows    int
 }
 
 // Find is a method that finds the root of the block the tile x belongs to using path compression
@@ -131,4 +117,58 @@ func (p Piano) Add(x Piastrella, c string, i int) {
 		p.Tiles[x].Intensity = i
 		p.Tiles[root].BlockIntensity += i - oldInt
 	}
+}
+
+// UI The graphic interface
+//
+// App The app itself
+// Window The window of the app
+// Grid The grid representing the piano
+// Buttons The buttons of the several functions
+// Columns The number of columns of the grid
+// Rows The number of row of the grid
+type UI struct {
+	App     fyne.App
+	Window  fyne.Window
+	Grid    *fyne.Container
+	Rects   [][]*canvas.Rectangle
+	Buttons *fyne.Container
+	List    *fyne.Container
+	Columns int
+	Rows    int
+}
+
+// UpdateCell updates the grid when a new tile is coloured
+//
+// @param x y The coordinates of the tile (y must be shifted)
+// @param hex The RGBA color
+func (ui UI) UpdateCell(x, y int, hex color.Color) {
+	ui.Rects[y][x].FillColor = hex
+	ui.Rects[y][x].Refresh()
+}
+
+func (ui UI) UpdateRule(reg Rule) {
+	res := ""
+	lab := ""
+	for _, v := range reg.Ruleset {
+		res = res + strconv.Itoa(v.Count) + " " + v.Color + " "
+	}
+	lab = lab + "Usage: " + strconv.Itoa(reg.Usage) + " - Rule: " + reg.Color + " " + res
+	wid := widget.NewLabel(lab)
+
+	for _, el := range ui.List.Objects {
+		if el == wid {
+			reg.Usage++
+			res := ""
+			lab := ""
+			for _, v := range reg.Ruleset {
+				res = res + strconv.Itoa(v.Count) + " " + v.Color + " "
+			}
+			lab = lab + "Usage: " + strconv.Itoa(reg.Usage) + " - Rule: " + reg.Color + " " + res
+			wid := widget.NewLabel(lab)
+			el = wid
+			return
+		}
+	}
+    ui.List.Refresh()
 }

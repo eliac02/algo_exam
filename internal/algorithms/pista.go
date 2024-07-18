@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 	models "tiles/internal/models"
+	utils "tiles/internal/utils"
 )
 
 // Pista prints the sequence of tiles following the directions of the string s
@@ -22,7 +23,7 @@ func Pista(p models.Piano, x, y int, s string) {
 	listOfDirections := directions[3]
 
 	// if the directions are valid print the tiles
-	flag, sequence := verificaPista(p, x, y, listOfDirections)
+	flag, sequence := utils.VerificaPista(p, x, y, listOfDirections)
 	if flag {
 		fmt.Println("[")
 		fmt.Printf("%d %d %s %d\n", tile.X, tile.Y, p.Tiles[tile].Color, p.Tiles[tile].Intensity)

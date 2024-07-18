@@ -15,9 +15,9 @@ func Regola(p models.Piano, r string) {
 
 	// create the rule and add it to the system
 	var newRule models.Rule
-	newRule.Color = rulesSplitted[1]
+	newRule.Color = rulesSplitted[0]
 	newRule.Ruleset = make([]models.Ruleset, 0)
-	for i := 2; i <= (len(rulesSplitted) - 2); i += 2 {
+	for i := 1; i <= (len(rulesSplitted) - 2); i += 2 {
 		num, err := strconv.Atoi(rulesSplitted[i])
 		if err != nil {
 			return
