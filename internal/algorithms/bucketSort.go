@@ -6,8 +6,9 @@ import (
 
 // bucketSort sorts the list of rules with O(n+k) time complexity, where n is the number of rules and k is the usage of the most-used rule
 //
+// @param ui The graphic interface
 // @param The pointer to the array containing all the rules of the system
-func bucketSort(arr *[]models.Rule) {
+func bucketSort(ui *models.UI, arr *[]models.Rule) {
 	if len(*arr) == 0 {
 		return
 	}
@@ -37,6 +38,7 @@ func bucketSort(arr *[]models.Rule) {
 		current := list.head
 		for current != nil {
 			(*arr)[index] = current.data
+            ui.UpdateRule(index, (*arr)[index])
 			index++
 			current = current.next
 		}

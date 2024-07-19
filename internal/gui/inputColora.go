@@ -15,10 +15,8 @@ import (
 
 // showColoraDialogTakeParam takes from the user the input for Colora
 //
-// @param win The window where the dialog will be displayed
-// @return x y The coordinates of the tile
-// @return hex The hexadecimal color of the tile
-// @intensity The intensity of the color of the tile
+// @param ui The graphic interface
+// @param p The system tiles-rulels
 func showColoraDialogTakeParam(ui *models.UI, p models.Piano) {
 	input1 := widget.NewEntry()
 	input1.SetPlaceHolder("X")

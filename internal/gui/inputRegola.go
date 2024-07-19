@@ -38,7 +38,7 @@ func showRegolaDialogTakeParam(ui *models.UI, p models.Piano) {
 				errorLabel.SetText("Regola inserita")
 				errorLabel.Show()
 				algorithms.Regola(p, input.Text)
-				utils.AggiungiRegola(ui, p)
+				ui.AddRule(p)
 			}
 		},
 		SubmitText: "Inserisci regola",

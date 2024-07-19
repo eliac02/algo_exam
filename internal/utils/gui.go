@@ -6,9 +6,6 @@ import (
 	"regexp"
 	"strconv"
 	"tiles/internal/models"
-
-	"fyne.io/fyne/v2/widget"
-	"fyne.io/fyne/v2"
 )
 
 // checkGridSize checks if a newly created tile's coordinates are bugger than the sizes of the checkGridSize
@@ -58,27 +55,4 @@ func ParseHexColor(hex string) (color.Color, error) {
 func IsValidHexColor(s string) bool {
 	re := regexp.MustCompile(`^#[0-9a-fA-F]{6}$`)
 	return re.MatchString(s)
-}
-
-// CreateItem create a new element of the rules's list
-//
-// @param r The rule to add to the list
-// @return fyne.CanvasObject The newly created element
-func CreateItem(r models.Rule) fyne.CanvasObject {
-	res := ""
-	lab := ""
-	for _, v := range r.Ruleset {
-		res = res + strconv.Itoa(v.Count) + " " + v.Color + " "
-	}
-	lab = lab + "Usage: " + strconv.Itoa(r.Usage) + " - Rule: " + r.Color + " " + res
-	return widget.NewLabel(lab)
-}
-
-// AggiungiRegola adds a rule to the graphic list
-//
-// @param ui The graphic interface
-// @param p The system tiles-rules
-func AggiungiRegola(ui *models.UI, p models.Piano) {
-	rule := CreateItem((*p.Rules)[len(*p.Rules)-1])
-	ui.List.Add(rule)
 }

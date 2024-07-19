@@ -134,6 +134,7 @@ type UI struct {
 	Rects   [][]*canvas.Rectangle
 	Buttons *fyne.Container
 	List    *fyne.Container
+	Rules   *[]*widget.Label
 	Columns int
 	Rows    int
 }
@@ -147,28 +148,33 @@ func (ui UI) UpdateCell(x, y int, hex color.Color) {
 	ui.Rects[y][x].Refresh()
 }
 
-func (ui UI) UpdateRule(reg Rule) {
-	res := ""
-	lab := ""
-	for _, v := range reg.Ruleset {
-		res = res + strconv.Itoa(v.Count) + " " + v.Color + " "
+// CreateItem create a new element of the rules's list
+//
+// @param r The rule to add to the list
+// @return fyne.CanvasObject The newly created element
+func (ui UI) CreateRule(rule Rule) string {
+	res, rs := "", ""
+	for _, r := range rule.Ruleset {
+		rs = rs + strconv.Itoa(r.Count) + " " + r.Color + " "
 	}
-	lab = lab + "Usage: " + strconv.Itoa(reg.Usage) + " - Rule: " + reg.Color + " " + res
-	wid := widget.NewLabel(lab)
+	res = res + "Usage: " + strconv.Itoa(rule.Usage) + " | Color: " + rule.Color + " " + rs
+	return res
+}
 
-	for _, el := range ui.List.Objects {
-		if el == wid {
-			reg.Usage++
-			res := ""
-			lab := ""
-			for _, v := range reg.Ruleset {
-				res = res + strconv.Itoa(v.Count) + " " + v.Color + " "
-			}
-			lab = lab + "Usage: " + strconv.Itoa(reg.Usage) + " - Rule: " + reg.Color + " " + res
-			wid := widget.NewLabel(lab)
-			el = wid
-			return
-		}
-	}
-    ui.List.Refresh()
+// AddRule adds a rule to the graphic list
+//
+// @param p The system tiles-rules
+func (ui UI) AddRule(p Piano) {
+	row := widget.NewLabel((ui.CreateRule((*p.Rules)[len(*p.Rules)-1])))
+	*ui.Rules = append(*ui.Rules, row)
+	ui.List.Add(row)
+}
+
+// UpdateRule updates the list of rule when a rule is used
+//
+// @param index The index of the used rule
+// @param reg The rule used
+func (ui UI) UpdateRule(index int, reg Rule) {
+	(*ui.Rules)[index].SetText(ui.CreateRule(reg)) 
+	ui.List.Refresh()
 }

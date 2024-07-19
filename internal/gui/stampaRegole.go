@@ -8,7 +8,7 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-// showStampaDialog let the user see the lust of rules
+// showStampaDialog let the user see the list of rules
 //
 // @param ui The graphic interface
 // @param p The system tiles-rules
@@ -16,8 +16,8 @@ func showStampaDialog(ui *models.UI, p models.Piano) {
 	windowRule := ui.App.NewWindow("Lista regole")
 
 	sortButton := widget.NewButton("Ordina", func() {
-		algorithms.Ordina(p)
-		ui.List.Refresh()
+		algorithms.Ordina(ui, p)
+        ui.List.Refresh()
 	})
 
 	closeButton := widget.NewButton("Chiudi", func() {

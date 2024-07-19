@@ -1,15 +1,17 @@
 package algorithms
 
 import (
+	"image/color"
 	models "tiles/internal/models"
 	utils "tiles/internal/utils"
 )
 
 // Spegni removes from the system the tile (x,y)
 //
+// @param ui The graphic interface
 // @param p The system tiles-rules
 // @param x y The coordinates of the tile
-func Spegni(p models.Piano, x, y int) {
+func Spegni(ui *models.UI, p models.Piano, x, y int) {
 	tile := models.Piastrella{X: x, Y: y}
 
 	if _, exists := p.Tiles[tile]; !exists {
@@ -67,4 +69,6 @@ func Spegni(p models.Piano, x, y int) {
 
 	// ddelete the tile from the system
 	delete(p.Tiles, tile)
+
+    ui.UpdateCell(x, 14-y, color.Transparent)
 }

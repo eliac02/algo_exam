@@ -40,7 +40,7 @@ func initGrid(ui *models.UI) {
 func initButtons(ui *models.UI, p models.Piano) {
 	ui.Buttons = container.NewGridWithColumns(1)
 
-	buttons := make([]*widget.Button, 4)
+	buttons := make([]*widget.Button, 5)
 
 	coloraButton := widget.NewButton("Colora", func() {
 		showColoraDialogTakeParam(ui, p)
@@ -57,10 +57,15 @@ func initButtons(ui *models.UI, p models.Piano) {
 	})
 	buttons[2] = printButton
 
-    propagaButton := widget.NewButton("Propaga", func() {
-        showPropagaDialogTakeParam(ui, p)
+	propagaButton := widget.NewButton("Propaga", func() {
+		showPropagaDialogTakeParam(ui, p)
+	})
+	buttons[3] = propagaButton
+
+    spegniButton := widget.NewButton("Spegni", func() {
+        showSpegniDialogTakeParam(ui, p)
     })
-    buttons[3] = propagaButton
+    buttons[4] = spegniButton
 
 	for _, but := range buttons {
 		ui.Buttons.Add(but)
@@ -71,7 +76,9 @@ func initButtons(ui *models.UI, p models.Piano) {
 //
 // @param ui The graphic interface
 func initList(ui *models.UI) {
-	ui.List = container.NewVBox()
+    ui.List = container.NewGridWithColumns(1)
+    rules := make([]*widget.Label, 0)
+    ui.Rules = &rules
 }
 
 // initializeGUI initializes the whole graphic interface
